@@ -10,7 +10,7 @@ import {
   Shapes,
   Sparkles,
   Users,
-  Volume2Off,
+  Volume2,
 } from 'lucide-react';
 
 const nepaliVowels = [
@@ -264,7 +264,7 @@ export default function App() {
     showReward();
     window.setTimeout(() => {
       setCardIndex((value) => wrap(value + 1, cards.length));
-      setGameSeed((value) => value + 1);
+      setGameSeed((value) => value + 1;
     }, 500);
   };
 
@@ -357,7 +357,7 @@ export default function App() {
 
               <div className="flex min-h-[430px] flex-col items-center justify-center px-16 py-9 text-center">
                 <span className="inline-flex items-center gap-2 rounded-full border border-white bg-white/70 px-3 py-2 text-xs font-black text-slate-500 shadow-sm backdrop-blur">
-                  <Volume2Off size={17} /> {t.audioSoon}
+                  <Volume2 size={17} /> {t.audioSoon}
                 </span>
                 <span className="mt-3 text-[8.5rem] font-black leading-none drop-shadow-sm sm:text-[10.5rem]" style={{ color: currentTheme.accent }}>
                   {currentCard.letter}
@@ -431,7 +431,7 @@ export default function App() {
               <button type="button" aria-label="Previous card" onPointerDown={(event) => event.stopPropagation()} onClick={(event) => { event.stopPropagation(); previousCulture(); }} className="absolute left-3 top-1/2 z-30 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white bg-white/85 text-slate-600 shadow-lg"><ChevronLeft /></button>
               <button type="button" aria-label="Next card" onPointerDown={(event) => event.stopPropagation()} onClick={(event) => { event.stopPropagation(); nextCulture(); }} className="absolute right-3 top-1/2 z-30 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white bg-white/85 text-slate-600 shadow-lg"><ChevronRight /></button>
               <div className="flex min-h-[420px] flex-col items-center justify-center px-16 py-10 text-center">
-                <span className="inline-flex items-center gap-2 rounded-full border border-white bg-white/70 px-3 py-2 text-xs font-black text-slate-500"><Volume2Off size={17} /> {t.audioSoon}</span>
+                <span className="inline-flex items-center gap-2 rounded-full border border-white bg-white/70 px-3 py-2 text-xs font-black text-slate-500"><Volume2 size={17} /> {t.audioSoon}</span>
                 <span className="mt-4 text-[7rem] leading-none drop-shadow-sm sm:text-[9rem]">{currentCulture.icon}</span>
                 <h2 className="mt-3 text-4xl font-black leading-none text-slate-700">{language === 'ne' ? currentCulture.titleNe : currentCulture.titleEn}</h2>
                 <p className="mt-4 max-w-md text-lg font-bold leading-snug text-slate-600">{language === 'ne' ? currentCulture.descriptionNe : currentCulture.descriptionEn}</p>
@@ -480,7 +480,7 @@ export default function App() {
               <div className="p-5 text-center">
                 <span className="text-xs font-black uppercase tracking-wider text-violet-500">{language === 'ne' ? story.titleNe : story.titleEn}</span>
                 <p className="mx-auto mt-2 min-h-20 max-w-xl text-2xl font-black leading-snug text-slate-700">{language === 'ne' ? page.ne : page.en}</p>
-                <button type="button" disabled className="mt-3 inline-flex min-h-12 cursor-not-allowed items-center gap-2 rounded-2xl border border-slate-100 bg-slate-50 px-5 font-black text-slate-400"><Volume2Off size={21} /> {t.audioSoon}</button>
+                <button type="button" disabled className="mt-3 inline-flex min-h-12 cursor-not-allowed items-center gap-2 rounded-2xl border border-slate-100 bg-slate-50 px-5 font-black text-slate-400"><Volume2 size={21} /> {t.audioSoon}</button>
               </div>
               <div className="grid grid-cols-[3rem_1fr_3rem] items-center gap-2 px-4 pb-4">
                 <button type="button" disabled={storyPage === 0} onClick={() => setStoryPage((value) => Math.max(0, value - 1))} className="grid h-12 w-12 place-items-center rounded-2xl bg-violet-50 text-violet-600 disabled:opacity-30"><ChevronLeft /></button>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 742" role="img" aria-label="Sanumaya looking at a hexagon kite">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#bde8ff"/><stop offset="1" stop-color="#f7fbdd"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="480" height="742" rx="28" fill="url(#sky)"/>
+  <circle cx="70" cy="80" r="34" fill="#ffe07a"/>
+  <path d="M0 560 Q120 470 240 555 T480 540 V742 H0Z" fill="#8fd18c"/>
+  <path d="M0 625 Q115 555 240 620 T480 600 V742 H0Z" fill="#5fb57a"/>
+  <g filter="url(#shadow)">
+    <polygon points="300,125 374,168 374,254 300,297 226,254 226,168" fill="#ff8daf" stroke="#fff" stroke-width="10"/>
+    <path d="M300 297 C270 375 355 390 320 470" fill="none" stroke="#805d82" stroke-width="5"/>
+    <path d="M315 360 l36 20 -30 25z" fill="#ffd166"/>
+    <path d="M325 415 l38 20 -32 27z" fill="#8bd3dd"/>
+  </g>
+  <g transform="translate(85 395)">
+    <circle cx="85" cy="65" r="58" fill="#d58a55"/>
+    <path d="M32 59 Q85 -5 138 59 L132 20 Q85 -18 38 20Z" fill="#3f2c2a"/>
+    <circle cx="66" cy="65" r="6" fill="#2c2424"/><circle cx="104" cy="65" r="6" fill="#2c2424"/>
+    <path d="M70 89 Q85 103 101 89" fill="none" stroke="#7a392f" stroke-width="4" stroke-linecap="round"/>
+    <path d="M40 118 Q85 92 130 118 L148 265 H22Z" fill="#55aee6"/>
+    <path d="M127 132 Q175 95 198 56" fill="none" stroke="#d58a55" stroke-width="20" stroke-linecap="round"/>
+    <circle cx="200" cy="53" r="13" fill="#d58a55"/>
+  </g>
+  <g fill="#fff" opacity=".8"><circle cx="95" cy="180" r="18"/><circle cx="120" cy="175" r="24"/><circle cx="147" cy="182" r="17"/></g>
+</svg>

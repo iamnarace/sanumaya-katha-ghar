@@ -1,0 +1,225 @@
+export const HB_BASE = 'https://hamrobarnamala.com';
+
+export const hbImage = (word) => `${HB_BASE}/images/nepali/${encodeURIComponent(word)}.webp`;
+export const storyCover = (slug) => `${HB_BASE}/stories/${slug}.jpg`;
+
+const makeCards = (rows) => rows.map(([letter, word, translation, fallback, image = hbImage(word)]) => ({
+  letter,
+  word,
+  translation,
+  fallback,
+  image,
+}));
+
+export const vowels = makeCards([
+  ['अ', 'अनार', 'Pomegranate', '🍎'],
+  ['आ', 'आमा', 'Mother', '👩‍👧', '/images/family.jpg'],
+  ['इ', 'इनार', 'Well', '🪣'],
+  ['ई', 'ईश्वर', 'God', '🙏'],
+  ['उ', 'उखु', 'Sugarcane', '🎋'],
+  ['ऊ', 'ऊन', 'Wool', '🧶'],
+  ['ऋ', 'ऋषि', 'Sage', '🧘'],
+  ['ए', 'एकता', 'Unity', '🤝'],
+  ['ऐ', 'ऐना', 'Mirror', '🪞'],
+  ['ओ', 'ओखर', 'Walnut', '🌰'],
+  ['औ', 'औंला', 'Finger', '☝️'],
+  ['अं', 'अंश', 'Part', '🧩'],
+  ['अः', 'अः', 'Ah!', '😮'],
+]);
+
+export const consonants = makeCards([
+  ['क', 'कलम', 'Pen', '🖊️'],
+  ['ख', 'खरायो', 'Rabbit', '🐰'],
+  ['ग', 'गमला', 'Flowerpot', '🪴'],
+  ['घ', 'घर', 'House', '🏠'],
+  ['ङ', 'मसगेडी', 'Traditional symbol', '🔤'],
+  ['च', 'चरा', 'Bird', '🐦'],
+  ['छ', 'छाता', 'Umbrella', '☂️'],
+  ['ज', 'जग', 'Jug', '🫗'],
+  ['झ', 'झन्डा', 'Flag', '🇳🇵'],
+  ['ञ', 'गोरुसिंगे', 'Traditional symbol', '🔤'],
+  ['ट', 'टोपी', 'Hat', '🧢'],
+  ['ठ', 'ठडेउरो', 'Traditional object', '🪵'],
+  ['ड', 'डमरु', 'Drum', '🥁'],
+  ['ढ', 'ढकी', 'Basket', '🧺'],
+  ['ण', 'तिनधर्के', 'Traditional symbol', '🔤'],
+  ['त', 'तबला', 'Drum', '🥁'],
+  ['थ', 'थरमस', 'Thermos', '🧴'],
+  ['द', 'दराज', 'Wardrobe', '🚪'],
+  ['ध', 'धनुष', 'Bow', '🏹'],
+  ['न', 'नरिवल', 'Coconut', '🥥'],
+  ['प', 'परेवा', 'Pigeon', '🕊️'],
+  ['फ', 'फलफूल', 'Fruits', '🍎'],
+  ['ब', 'बस', 'Bus', '🚌'],
+  ['भ', 'भकुण्डो', 'Ball', '⚽'],
+  ['म', 'मयुर', 'Peacock', '🦚'],
+  ['य', 'यज्ञ', 'Holy fire', '🔥'],
+  ['र', 'रथ', 'Chariot', '🛺'],
+  ['ल', 'लसुन', 'Garlic', '🧄'],
+  ['व', 'वकिल', 'Lawyer', '⚖️'],
+  ['श', 'शंख', 'Conch', '🐚'],
+  ['ष', 'षट्कोण', 'Hexagon', '⬡'],
+  ['स', 'सलाई', 'Matchstick', '🪵'],
+  ['ह', 'हलो', 'Plough', '🌾'],
+  ['क्ष', 'क्षत्री', 'Warrior', '🛡️'],
+  ['त्र', 'त्रिशुल', 'Trident', '🔱'],
+  ['ज्ञ', 'यज्ञ', 'Knowledge / holy fire', '📚'],
+]);
+
+const englishPhoto = {
+  Apple: hbImage('स्याउ'),
+  Ball: hbImage('भकुण्डो'),
+  Cat: hbImage('बिरालो'),
+  Dog: hbImage('कुकुर'),
+  Elephant: hbImage('हात्ती'),
+  Flower: hbImage('फूल'),
+  Garden: '/images/rose.jpg',
+  House: hbImage('घर'),
+  'Ice cream': hbImage('आइसक्रिम'),
+  Juice: hbImage('जुस'),
+  Kite: hbImage('चङ्गा'),
+  Lotus: hbImage('कमल'),
+  Moon: hbImage('चन्द्रमा'),
+  Nest: hbImage('गुँड'),
+  Orange: hbImage('सुन्तला'),
+  Parrot: hbImage('सुगा'),
+  Queen: hbImage('रानी'),
+  Rabbit: hbImage('खरायो'),
+  Sanumaya: '/images/bench.jpg',
+  Tiger: hbImage('बाघ'),
+  Umbrella: hbImage('छाता'),
+  Van: hbImage('भ्यान'),
+  Water: hbImage('पानी'),
+  Xylophone: hbImage('जाइलोफोन'),
+  Yak: hbImage('याक'),
+  Zebra: hbImage('जेब्रा'),
+};
+
+export const english = [
+  ['A', 'Apple', '🍎'], ['B', 'Ball', '⚽'], ['C', 'Cat', '🐱'], ['D', 'Dog', '🐶'],
+  ['E', 'Elephant', '🐘'], ['F', 'Flower', '🌸'], ['G', 'Garden', '🌻'], ['H', 'House', '🏠'],
+  ['I', 'Ice cream', '🍦'], ['J', 'Juice', '🧃'], ['K', 'Kite', '🪁'], ['L', 'Lotus', '🪷'],
+  ['M', 'Moon', '🌙'], ['N', 'Nest', '🪺'], ['O', 'Orange', '🍊'], ['P', 'Parrot', '🦜'],
+  ['Q', 'Queen', '👑'], ['R', 'Rabbit', '🐰'], ['S', 'Sanumaya', '💖'], ['T', 'Tiger', '🐯'],
+  ['U', 'Umbrella', '☂️'], ['V', 'Van', '🚐'], ['W', 'Water', '💧'], ['X', 'Xylophone', '🎼'],
+  ['Y', 'Yak', '🐂'], ['Z', 'Zebra', '🦓'],
+].map(([letter, word, fallback]) => ({ letter, word, translation: '', fallback, image: englishPhoto[word] }));
+
+export const culture = [
+  ['नमस्ते', 'Namaste', '🙏', 'दुई हात जोडेर नमस्ते गरौँ।', 'Join both hands and say Namaste.', hbImage('नमस्ते')],
+  ['गणेश भगवान', 'Lord Ganesh', '🕉️', 'गणेश भगवानलाई आदरले नमस्ते गरौँ।', 'A gentle introduction to Lord Ganesh.', hbImage('गणेश')],
+  ['शिव भगवान', 'Lord Shiva', '🔱', 'शिव भगवान, डमरु र हिमाल चिनौँ।', 'Meet Lord Shiva, the damaru and the Himalayas.', hbImage('शिव')],
+  ['पूजा', 'Puja', '🌺', 'फूल र दियोसहित श्रद्धाले पूजा गरिन्छ।', 'Puja is a respectful family prayer.', hbImage('पूजा')],
+  ['टीका', 'Tika', '🔴', 'टीका माया र आशीर्वादको चिन्ह हो।', 'Tika is a loving mark of blessing.', hbImage('टीका')],
+  ['मादल', 'Madal', '🥁', 'मादल नेपाली बाजा हो।', 'The madal is a traditional Nepali drum.', hbImage('मादल')],
+  ['दियो', 'Diyo', '🪔', 'दियोले घर उज्यालो बनाउँछ।', 'A diya brings warm light.', hbImage('दियो')],
+  ['मन्दिर', 'Temple', '🛕', 'मन्दिरमा शान्त भएर नमस्ते गरौँ।', 'At the temple we are calm and respectful.', hbImage('मन्दिर')],
+  ['दशैं', 'Dashain', '🌾', 'दशैंमा टीका, जमरा र आशीर्वाद।', 'Dashain brings tika, jamara and blessings.', hbImage('दशैं')],
+  ['तिहार', 'Tihar', '✨', 'तिहारमा दियो, फूलमाला र उज्यालो।', 'Tihar is filled with light and flowers.', hbImage('तिहार')],
+].map(([ne, en, fallback, descNe, descEn, image], id) => ({ id, ne, en, fallback, descNe, descEn, image }));
+
+export const libraryStories = [
+  ['dashain-kite', 'दशैंको चङ्गा', 'The Dashain Kite', 'Festivals', 'Medium', 'मित्रता जितभन्दा ठूलो हुन्छ।'],
+  ['festival-of-lights', 'तिहारको बत्ती', 'The Festival of Lights', 'Festivals', 'Easy', 'उज्यालो बाँड्दा खुशी बढ्छ।'],
+  ['fun-of-holi', 'होलीको रमाइलो', 'The Fun of Holi', 'Festivals', 'Easy', 'चाडपर्वले नयाँ साथी जोड्छ।'],
+  ['momo-party', 'म:म पार्टी', 'The Momo Party', 'Food', 'Easy', 'हजुरआमासँग प्रेमले म:म बनाउने कथा।'],
+  ['danphe-dance', 'डाँफेको नाच', "The Danphe's Dance", 'Nature', 'Medium', 'हरेक रङ विशेष हुन्छ।'],
+  ['red-panda-bamboo', 'हाब्रेको बाँस', "The Red Panda's Bamboo", 'Nature', 'Medium', 'प्रकृति र जनावरको घर जोगाउने कथा।'],
+  ['bhaktapur-potter', 'भक्तपुरको कुमाले', 'The Potter of Bhaktapur', 'Culture', 'Medium', 'धैर्य र सीपको सांस्कृतिक कथा।'],
+  ['talking-madal', 'बोल्ने मादल', 'The Talking Madal', 'Folklore', 'Medium', 'इमानदारी सिकाउने जादुई मादल।'],
+  ['yetis-gift', 'यतीको उपहार', "The Yeti's Gift", 'Folklore', 'Easy', 'दयालु यतीले घर फर्कन मद्दत गर्छ।'],
+  ['grandfathers-glasses', 'हजुरबुबाको चश्मा', "Grandfather's Glasses", 'Family', 'Easy', 'धैर्य र परिवारको माया।'],
+  ['wise-grandmother', 'ज्ञानी हजुरआमा', 'The Wise Grandmother', 'Family', 'Easy', 'मिलेर बस्ने शक्ति सिकाउने कथा।'],
+  ['thirsty-crow', 'तिर्खाएको काग', 'The Thirsty Crow', 'Cleverness', 'Easy', 'सोचेर समस्या समाधान गर्ने कथा।'],
+].map(([slug, titleNe, titleEn, category, level, summaryNe]) => ({
+  slug,
+  titleNe,
+  titleEn,
+  category,
+  level,
+  summaryNe,
+  image: storyCover(slug),
+  url: `${HB_BASE}/stories/${slug}`,
+}));
+
+export const gameLinks = [
+  ['Memory Match', 'चित्र र शब्दको जोडी मिलाऔँ', '🧠', `${HB_BASE}/games/memory-match`, '3 difficulty levels'],
+  ['Spelling Game', 'नेपाली अक्षर छानेर शब्द बनाऔँ', '🔤', `${HB_BASE}/games/spelling`, 'Easy to hard'],
+  ['Bahrakhari Builder', 'व्यञ्जन र मात्रा जोडौँ', 'अ', `${HB_BASE}/games/bahrakhari-builder`, '36 × matras'],
+  ['Number Counting', 'वस्तु गनेर नेपाली अंक चिनौँ', '१', `${HB_BASE}/games/number-counting`, '1 to 100'],
+  ['Nepali Quiz', 'अक्षर, जनावर, परिवार र चाडपर्व', '⭐', `${HB_BASE}/quiz`, '130 questions'],
+  ['Match Letters', 'नेपाली अक्षर र उच्चारण मिलाऔँ', '🔗', `${HB_BASE}/exercises/match-letters`, '6 activities'],
+  ['Unscramble Words', 'टुक्रा मिलाएर शब्द बनाऔँ', '🧩', `${HB_BASE}/exercises/unscramble`, '10 activities'],
+  ['Festival Match', 'चाडपर्व र अर्थ मिलाऔँ', '🪔', `${HB_BASE}/exercises/match-festivals`, '4 activities'],
+].map(([title, description, icon, url, meta]) => ({ title, description, icon, url, meta }));
+
+export const personalStoryTemplates = [
+  {
+    id: 'garden',
+    titleNe: '{name} र रातो फूल',
+    titleEn: '{name} and the Red Flower',
+    cover: '/images/rose.jpg',
+    fallback: '🌹',
+    pages: [
+      ['/images/rose.jpg', 'बिहान {name} फूलबारीमा गइन्।', 'One morning, {name} went to the garden.'],
+      [hbImage('फूल'), '{name} ले ठूलो रातो फूल देखिन्।', '{name} saw a big red flower.'],
+      [hbImage('पुतली'), 'रङ्गीन पुतली फूलमाथि बस्यो।', 'A colourful butterfly landed on the flower.'],
+      [hbImage('चरा'), 'सानो चरा चिरबिर गर्दै आयो।', 'A little bird came chirping.'],
+      [hbImage('खरायो'), '{name} को मनपर्ने {animal} पनि आयो।', "{name}'s favourite {animal} came too."],
+      ['/images/bench.jpg', '{nickname} खुशीले हाँसिन्।', '{nickname} smiled with joy.'],
+      [hbImage('घर'), 'त्यसपछि {name} घर फर्किइन्।', 'Then {name} went home.'],
+      ['/images/family.jpg', 'आमा र बुवाले भने, “स्याबास {nickname}!”', 'Mum and Dad said, “Well done, {nickname}!”'],
+    ],
+  },
+  {
+    id: 'nepal',
+    titleNe: '{name} को नेपाल यात्रा',
+    titleEn: "{name}'s Nepal Adventure",
+    cover: '/images/traditional.jpg',
+    fallback: '🇳🇵',
+    pages: [
+      [hbImage('जहाज'), '{name} जहाजमा नेपाल गइन्।', '{name} flew to Nepal.'],
+      [hbImage('हिमाल'), 'टाढा सेता हिमाल देखिए।', 'Snowy mountains appeared in the distance.'],
+      [hbImage('घर'), '{name} ले नेपाली घर देखिन्।', '{name} saw a Nepali home.'],
+      [hbImage('गाई'), 'आँगनमा गाई थियो।', 'There was a cow in the yard.'],
+      [hbImage('मादल'), 'मादलले धिन ता भन्यो।', 'The madal went dhin ta.'],
+      [hbImage('नमस्ते'), '{name} ले सबैलाई नमस्ते गरिन्।', '{name} greeted everyone with Namaste.'],
+      ['/images/traditional.jpg', '{nickname} ले नेपाली लुगा लगाइन्।', '{nickname} wore Nepali clothes.'],
+      [hbImage('झन्डा'), 'यो नेपालको झण्डा हो।', 'This is the flag of Nepal.'],
+      ['/images/family.jpg', '{name} ले भनिन्, “नेपाल प्यारो छ!”', '{name} said, “I love Nepal!”'],
+    ],
+  },
+  {
+    id: 'festival',
+    titleNe: '{name} को उज्यालो तिहार',
+    titleEn: "{name}'s Bright Tihar",
+    cover: '/images/traditional.jpg',
+    fallback: '🪔',
+    pages: [
+      [hbImage('दियो'), 'सानो दियो बल्यो।', 'A little diya began to glow.'],
+      [hbImage('फूलमाला'), 'घरमा फूलमाला सजियो।', 'Flower garlands decorated the home.'],
+      [hbImage('रंगोली'), '{name} ले रङ्गीन रंगोली हेरिन्।', '{name} looked at the colourful rangoli.'],
+      [hbImage('पूजा'), 'परिवारले सँगै पूजा गर्यो।', 'The family did puja together.'],
+      [hbImage('टीका'), '{nickname} ले टीका लगाइन्।', '{nickname} received tika.'],
+      [hbImage('मिठाई'), 'सबैले मिठाई बाँडे।', 'Everyone shared sweets.'],
+      ['/images/family.jpg', 'परिवारसँग तिहार झन् उज्यालो भयो।', 'Tihar felt brighter with family.'],
+    ],
+  },
+];
+
+export const family = [
+  ['आमा, बुवा र सानुमाया', 'Mum, Dad and Sanumaya', '/images/family.jpg', '👨‍👩‍👧'],
+  ['हजुरबा', 'Grandfather', '', '👴'],
+  ['हजुरआमा', 'Grandmother', '', '👵'],
+  ['मामा', 'Maternal uncle', '', '🧔'],
+  ['माइजु', 'Aunt', '', '👩'],
+].map(([ne, en, image, fallback], id) => ({ id, ne, en, image, fallback }));
+
+export const defaultProfile = {
+  name: 'सानुमाया',
+  englishName: 'Sanumaya',
+  nickname: 'सानु',
+  favouriteAnimal: 'खरायो',
+  favouriteColor: 'गुलाबी',
+  homePlace: 'Sydney',
+};

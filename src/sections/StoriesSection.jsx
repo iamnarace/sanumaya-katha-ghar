@@ -18,7 +18,7 @@ export default function StoriesSection({ language, profile, storybooks, story, p
       </div>
       <div className="mt-5 flex snap-x gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {storybooks.map((item) => (
-          <button type="button" key={item.id} onClick={() => { setStoryId(item.id); setStoryPage(0); }} className={`relative h-72 w-[82%] flex-none snap-center overflow-hidden rounded-[1.9rem] border-[4px] bg-amber-50 shadow-xl sm:w-[48%] ${item.id === story.id ? 'border-violet-300' : 'border-white'}`}>
+          <button type="button" key={item.id} onClick={() => { setStoryId(item.id); setStoryPage(0); }} className={`relative h-80 sm:h-96 w-[82%] flex-none snap-center overflow-hidden rounded-[1.9rem] border-[4px] bg-amber-50 shadow-xl sm:w-[48%] ${item.id === story.id ? 'border-violet-300' : 'border-white'}`}>
             <SafeImage src={item.cover} alt={personalize(language === 'ne' ? item.titleNe : item.titleEn, profile, language)} fallback={item.fallback} className="h-full w-full" contain />
             <span className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
             <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-black shadow">{item.pages.length} {language === 'ne' ? 'पाना' : 'pages'}</span>
@@ -66,13 +66,13 @@ export default function StoriesSection({ language, profile, storybooks, story, p
       </div>
 
       {/* Book Pages Area */}
-      <div className="flex flex-col md:flex-row bg-[#e8e9eb] p-2 sm:p-4 md:p-8 lg:p-12 gap-2 md:gap-0 min-h-[500px] md:min-h-[600px]">
+      <div className="flex flex-col md:flex-row bg-[#e8e9eb] p-2 sm:p-4 md:p-8 lg:p-12 gap-2 md:gap-0 min-h-[600px] md:min-h-[75vh]">
         
         {/* Left Page (Image) */}
         <div className="flex-1 bg-white rounded-lg md:rounded-l-2xl md:rounded-r-none book-spine-left relative overflow-hidden z-10 flex flex-col group">
           <div className="absolute top-0 bottom-0 right-0 w-8 md:w-16 bg-gradient-to-l from-slate-300/40 to-transparent pointer-events-none hidden md:block z-20"></div>
           
-          <div className="flex-1 w-full h-[40vh] md:h-auto flex items-center justify-center p-4 sm:p-6 md:p-10 relative">
+          <div className="flex-1 w-full h-[50vh] md:h-auto flex items-center justify-center p-4 sm:p-6 md:p-10 relative">
              <SafeImage src={page[0]} alt={`${t.page} ${storyPage + 1}`} fallback={story.fallback} className="w-full h-full object-contain drop-shadow-sm" contain />
              {/* Mobile swipe controls overlay */}
              <div className="absolute inset-y-0 left-0 w-16 md:hidden z-30 flex items-center justify-start pl-2">

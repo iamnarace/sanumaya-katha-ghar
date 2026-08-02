@@ -175,6 +175,12 @@ export default function App() {
           </p>
         </div>
 
+        {/* Personalized Stickers */}
+        <img src="/images/stickers/waving.png" className="absolute top-32 left-4 sm:left-12 w-24 sm:w-32 opacity-80 mix-blend-multiply -rotate-12 float-hand z-10" alt="" />
+        <img src="/images/stickers/laughing.png" className="absolute top-24 right-4 sm:right-16 w-24 sm:w-32 opacity-80 mix-blend-multiply rotate-12 float-hand z-10" style={{ animationDelay: '1s' }} alt="" />
+        <img src="/images/stickers/pointing.png" className="absolute bottom-16 left-4 sm:left-12 w-24 sm:w-32 opacity-80 mix-blend-multiply rotate-6 float-hand z-10" style={{ animationDelay: '2s' }} alt="" />
+        <img src="/images/stickers/namaste.png" className="absolute bottom-20 right-4 sm:right-12 w-24 sm:w-32 opacity-80 mix-blend-multiply -rotate-6 float-hand z-10" style={{ animationDelay: '0.5s' }} alt="" />
+
         {/* Parental Gate & Controls */}
         <button 
           onPointerDown={handleSettingsHold}

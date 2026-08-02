@@ -166,11 +166,11 @@ export default function App() {
         <div className="absolute top-40 right-20 w-24 h-8 bg-white/50 rounded-full blur-lg animate-pulse" style={{ animationDelay: '1s' }}></div>
         
         {/* Title Area */}
-        <div className="relative z-20 text-center w-full px-4 mb-4 sm:mb-8 mt-16 sm:mt-0">
+        <div className="absolute top-[5vh] sm:top-[8vh] z-20 text-center w-full px-4">
           <h1 className="text-[2.5rem] sm:text-6xl md:text-7xl font-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.1)] tracking-wide leading-tight">
             {language === 'ne' ? 'सानुमायाको कथाघर' : "Sanumaya's World"}
           </h1>
-          <p className="mt-2 text-white/90 font-bold text-sm sm:text-lg drop-shadow-sm">
+          <p className="mt-1 sm:mt-2 text-white/90 font-bold text-sm sm:text-lg drop-shadow-sm">
             {language === 'ne' ? 'रमाइलो संसारमा स्वागत छ!' : 'Welcome to the fun learning world!'}
           </p>
         </div>
@@ -200,7 +200,7 @@ export default function App() {
         </button>
 
         {/* The 4 Giant Portals */}
-        <div className="z-10 grid grid-cols-2 gap-4 sm:gap-6 md:gap-10 w-full max-w-2xl mt-10 sm:mt-16">
+        <div className="z-10 grid grid-cols-2 gap-4 sm:gap-6 md:gap-10 w-full max-w-2xl mt-16 sm:mt-20">
           <button onClick={() => setSection('learn')} className="group relative aspect-square bg-gradient-to-br from-[#ff9a9e] to-[#fecfef] rounded-[2.5rem] sm:rounded-[4rem] border-[6px] border-white/70 shadow-[0_20px_50px_rgba(255,154,158,0.5)] transform transition-transform hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 sm:gap-4 float-hand" style={{ animationDelay: '0s' }}>
             <span className="text-[5.5rem] sm:text-[6rem] md:text-[7.5rem] font-black text-white drop-shadow-md leading-none pt-4 tracking-tighter">
               {language === 'ne' ? 'क' : 'ABC'}

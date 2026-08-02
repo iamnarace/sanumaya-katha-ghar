@@ -156,7 +156,40 @@ export const storybooks = [
     ],
   },
 
-
+  {
+    id: 'sharing',
+    titleNe: 'मिलेर खेलौँ, {name}!',
+    titleEn: "Let's Share, {name}!",
+    cover: '/images/stories/sharing/page-06.jpg',
+    fallback: '🧸',
+    pages: [
+      ['/images/stories/sharing/page-01.jpg', '{name}सँग धेरै खेलौना छन्।', '{name} has many toys.'],
+      ['/images/stories/sharing/page-02.jpg', 'उनको साथी खेल्न आयो।', 'Her friend came to play.'],
+      ['/images/stories/sharing/page-03.jpg', 'साथीले भालु माग्यो।', 'The friend asked for the bear.'],
+      ['/images/stories/sharing/page-04.jpg', '{name}ले भालु दिइन्।', '{name} gave the bear.'],
+      ['/images/stories/sharing/page-05.jpg', 'साथीले भन्यो— धन्यवाद!', 'The friend said—Thank you!'],
+      ['/images/stories/sharing/page-06.jpg', 'उनीहरू मिलेर ब्लक बनाए।', 'They built blocks together.'],
+      ['/images/stories/sharing/page-07.jpg', 'सँगै खेल्दा झन् रमाइलो हुन्छ!', 'Playing together is more fun!'],
+      ['/images/stories/sharing/page-08.jpg', 'ज्ञानी {nickname}!', 'Good girl, {nickname}!'],
+    ],
+  },
+  {
+    id: 'hide-and-seek',
+    titleNe: 'खरायोको लुकामारी',
+    titleEn: 'Hide and Seek with Kharaayo',
+    cover: '/images/stories/hide-and-seek/page-07.jpg',
+    fallback: '🐰',
+    pages: [
+      ['/images/stories/hide-and-seek/page-01.jpg', '{name}को प्यारो खरायो हरायो!', "{name}'s favorite rabbit is lost!"],
+      ['/images/stories/hide-and-seek/page-02.jpg', 'के उ ओछ्यान मुनि छ?', 'Is he under the bed?'],
+      ['/images/stories/hide-and-seek/page-03.jpg', 'अहँ, छैन।', 'No, he is not.'],
+      ['/images/stories/hide-and-seek/page-04.jpg', 'के उ ढोका पछाडि छ?', 'Is he behind the door?'],
+      ['/images/stories/hide-and-seek/page-05.jpg', 'अहँ, त्यहाँ पनि छैन।', 'No, not there either.'],
+      ['/images/stories/hide-and-seek/page-06.jpg', 'उहाँ हेर! टोकरी भित्र!', 'Look there! Inside the basket!'],
+      ['/images/stories/hide-and-seek/page-07.jpg', 'खरायो सुतिरहेको छ।', 'The rabbit is sleeping.'],
+      ['/images/stories/hide-and-seek/page-08.jpg', '{name}ले खरायोलाई बिस्तारै समातिन्।', '{name} held the rabbit gently.'],
+    ],
+  },
 ];
 
 export const family = [

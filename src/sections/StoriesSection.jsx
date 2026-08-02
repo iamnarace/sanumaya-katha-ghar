@@ -70,52 +70,36 @@ export default function StoriesSection({ language, profile, storybooks, story, p
         </div>
       </div>
 
-      {/* Book Pages Area */}
-      <div className="flex flex-col md:flex-row bg-[#e8e9eb] p-2 sm:p-4 md:p-8 lg:p-12 gap-2 md:gap-0 min-h-[600px] md:min-h-[75vh]">
+      {/* Immersive Book Page Area */}
+      <div className="flex flex-col relative w-full bg-slate-900 rounded-b-3xl overflow-hidden shadow-inner flex-1">
         
-        {/* Left Page (Image) */}
-        <div className="flex-1 bg-white rounded-lg md:rounded-l-2xl md:rounded-r-none book-spine-left relative overflow-hidden z-10 flex flex-col group">
-          <div className="absolute top-0 bottom-0 right-0 w-8 md:w-16 bg-gradient-to-l from-slate-300/40 to-transparent pointer-events-none hidden md:block z-20"></div>
+        {/* Full Image */}
+        <div className="relative w-full flex-1 min-h-[50vh] sm:min-h-[65vh] flex items-center justify-center">
+          <SafeImage src={page[0]} alt={`${t.page} ${storyPage + 1}`} fallback={story.fallback} className="absolute inset-0 w-full h-full object-contain" />
           
-          <div className="flex-1 w-full h-[50vh] md:h-auto flex items-center justify-center p-4 sm:p-6 md:p-10 relative">
-             <SafeImage src={page[0]} alt={`${t.page} ${storyPage + 1}`} fallback={story.fallback} className="w-full h-full object-contain drop-shadow-sm" contain />
-             {/* Mobile swipe controls overlay */}
-             <div className="absolute inset-y-0 left-0 w-16 md:hidden z-30 flex items-center justify-start pl-2">
-               <button onClick={prevPage} disabled={storyPage === 0} className="p-3 bg-white/80 rounded-full shadow-lg disabled:opacity-0 active:bg-slate-100"><ChevronLeft size={24} className="text-slate-800"/></button>
-             </div>
-             <div className="absolute inset-y-0 right-0 w-16 md:hidden z-30 flex items-center justify-end pr-2">
-               <button onClick={nextPage} className="p-3 bg-white/80 rounded-full shadow-lg active:bg-slate-100"><ChevronRight size={24} className="text-slate-800"/></button>
-             </div>
+          {/* Swipe controls overlay */}
+          <div className="absolute inset-y-0 left-0 w-24 sm:w-32 z-30 flex items-center justify-start pl-2 sm:pl-6">
+            <button onClick={prevPage} disabled={storyPage === 0} className="p-3 sm:p-5 bg-black/20 hover:bg-black/40 backdrop-blur-sm rounded-full shadow-lg disabled:opacity-0 active:scale-95 transition-all text-white"><ChevronLeft size={36} strokeWidth={3} /></button>
+          </div>
+          <div className="absolute inset-y-0 right-0 w-24 sm:w-32 z-30 flex items-center justify-end pr-2 sm:pr-6">
+            <button onClick={nextPage} className="p-3 sm:p-5 bg-black/20 hover:bg-black/40 backdrop-blur-sm rounded-full shadow-lg active:scale-95 transition-all text-white"><ChevronRight size={36} strokeWidth={3} /></button>
           </div>
         </div>
 
-        {/* Right Page (Text) */}
-        <div className="flex-1 bg-[#fdfcf8] rounded-lg md:rounded-r-2xl md:rounded-l-none book-spine-right relative z-0 flex flex-col">
-          <div className="absolute top-0 bottom-0 left-0 w-8 md:w-12 bg-gradient-to-r from-slate-200/50 to-transparent pointer-events-none hidden md:block z-10"></div>
-          
-          <div className="flex-1 w-full p-8 md:p-14 lg:p-20 flex flex-col justify-center relative">
-             <div className="absolute top-6 right-8 text-[10px] sm:text-xs font-black tracking-[0.2em] text-slate-300 uppercase hidden sm:block">
-               NARESH ADHIKARI
-             </div>
-             
-             <div className="relative z-20 max-w-lg mx-auto w-full">
-               <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold leading-[1.6] md:leading-[1.7] text-slate-800 drop-cap tracking-tight">
-                 {personalize(language === 'ne' ? page[1] : page[2], profile, language)}
-               </p>
-               
-               {/* Sound effect / secondary text */}
-               {(page[3] || page[4]) && (
-                 <p className="mt-8 md:mt-12 text-lg sm:text-xl md:text-2xl font-semibold text-slate-400 italic">
-                   {personalize(language === 'ne' ? page[3] : page[4], profile, language)}
-                 </p>
-               )}
-             </div>
-
-             <div className="absolute bottom-6 right-8 text-xs sm:text-sm font-black text-slate-300">
-               {storyPage + 1}
-             </div>
+        {/* Bottom Text Panel */}
+        <div className="w-full bg-white px-6 py-8 sm:px-12 sm:py-14 border-t-[6px] border-amber-400 z-20 flex flex-col items-center justify-center text-center relative shadow-[0_-10px_40px_rgba(0,0,0,0.15)]">
+          <div className="absolute top-4 left-6 text-xs sm:text-sm font-black text-slate-300 hidden sm:block">
+            {storyPage + 1} / {story.pages.length}
           </div>
-         </div>
+          <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-slate-800 tracking-tight max-w-4xl">
+            {personalize(language === 'ne' ? page[1] : page[2], profile, language)}
+          </p>
+          {(page[3] || page[4]) && (
+            <p className="mt-4 sm:mt-6 text-xl sm:text-2xl md:text-3xl font-bold text-slate-400 italic">
+              {personalize(language === 'ne' ? page[3] : page[4], profile, language)}
+            </p>
+          )}
+        </div>
       </div>
     </section>
     )}

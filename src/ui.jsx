@@ -2,9 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Volume2 } from 'lucide-react';
 
 export const themes = [
-  ['#f5f0ff', '#d9cff0', '#665b86'], ['#eef8ff', '#c9deeb', '#496d83'],
-  ['#effaf4', '#c9e2d2', '#4e7760'], ['#fff7ea', '#ead7b8', '#8a6a3c'],
-  ['#fff2f3', '#e8cbd0', '#8a5d66'],
+  ['#ffebf0', '#ffb3c6', '#ff4d6d'], // Vibrant Pink
+  ['#e0fbfc', '#98c1d9', '#3d5a80'], // Vibrant Blue
+  ['#fcf6bd', '#f2d0a9', '#f0a202'], // Vibrant Yellow
+  ['#d8f3dc', '#95d5b2', '#2d6a4f'], // Vibrant Green
+  ['#eadaff', '#c4a6ff', '#7b2cbf'], // Vibrant Purple
+  ['#ffe3e0', '#ffb5a7', '#f07167'], // Vibrant Coral
+  ['#cbf0f8', '#a0e4f1', '#00b4d8'], // Vibrant Cyan
 ].map(([background, border, accent]) => ({ background, border, accent }));
 
 export const wrap = (value, length) => (value + length) % length;

@@ -1,21 +1,21 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { BookOpen, Heart, Home, Landmark, RefreshCw, Shapes, Users } from 'lucide-react';
-import { consonants, culture, defaultProfile, english, family, storybooks, vowels } from './content.js';
+import { BookOpen, Gamepad2, Home, Landmark, Settings, Shapes, Sparkles } from 'lucide-react';
+import { consonants, defaultProfile, english, family, storybooks, vowels, vocabulary, vocabularyCategories } from './content.js';
 import { themes, useSwipe, wrap } from './ui.jsx';
 import LearnSection from './sections/LearnSection.jsx';
 import GamesSection from './sections/GamesSection.jsx';
 import StoriesSection from './sections/StoriesSection.jsx';
 import PersonalSection from './sections/PersonalSection.jsx';
-import CultureSection from './sections/CultureSection.jsx';
+import VocabSection from './sections/VocabSection.jsx';
 
 const copy = {
-  ne: { learn: 'सिकौँ', games: 'खेल', stories: 'कथा', sanumaya: 'सानुमाया', culture: 'संस्कार', audio: 'आवाज पछि थपिनेछ', previous: 'पछाडि', next: 'अर्को', page: 'पाना', reward: 'स्याबास सानुमाया!', tryAgain: 'फेरि प्रयास गरौँ', restart: 'फेरि सुरु गर्ने' },
-  en: { learn: 'Learn', games: 'Games', stories: 'Stories', sanumaya: 'Sanumaya', culture: 'Culture', audio: 'Audio coming soon', previous: 'Back', next: 'Next', page: 'Page', reward: 'Well done, Sanumaya!', tryAgain: 'Try again', restart: 'Start again' },
+  ne: { learn: 'सिकौँ', games: 'खेल', stories: 'कथा', sanumaya: 'सानुमाया', culture: 'संस्कार', vocab: 'शब्दहरू', audio: 'आवाज पछि थपिनेछ', previous: 'पछाडि', next: 'अर्को', page: 'पाना', reward: 'स्याबास सानुमाया!', tryAgain: 'फेरि प्रयास गरौँ', restart: 'फेरि सुरु गर्ने' },
+  en: { learn: 'Learn', games: 'Games', stories: 'Stories', sanumaya: 'Sanumaya', culture: 'Culture', vocab: 'Words', audio: 'Audio coming soon', previous: 'Back', next: 'Next', page: 'Page', reward: 'Well done, Sanumaya!', tryAgain: 'Try again', restart: 'Start again' },
 };
 
 export default function App() {
   const [language, setLanguage] = useState('ne');
-  const [section, setSection] = useState('learn');
+  const [section, setSection] = useState('home');
   const [nepaliSet, setNepaliSet] = useState('consonants');
   const [index, setIndex] = useState(0);
   const [cultureIndex, setCultureIndex] = useState(0);
@@ -28,8 +28,11 @@ export default function App() {
   const [storyPage, setStoryPage] = useState(0);
   const [revealed, setRevealed] = useState({});
   const rewardTimer = useRef(null);
-  const t = copy[language];
+  
+  // Parental gate lock
+  const holdTimer = useRef(null);
 
+  const t = copy[language];
   const cards = language === 'en' ? english : nepaliSet === 'vowels' ? vowels : consonants;
   const cardIndex = index % cards.length;
   const card = cards[cardIndex];
@@ -59,6 +62,7 @@ export default function App() {
 
   useEffect(() => () => {
     if (rewardTimer.current) clearTimeout(rewardTimer.current);
+    if (holdTimer.current) clearTimeout(holdTimer.current);
   }, []);
 
   const previous = () => setIndex((value) => wrap(value - 1, cards.length));
@@ -143,16 +147,106 @@ export default function App() {
     }
   };
 
-  return <div className="min-h-screen select-none bg-[#fbfaf7] pb-28 text-slate-700">
-    {reward && <div className="reward-layer pointer-events-none fixed inset-0 z-[100] grid place-items-center bg-slate-900/10 p-4"><div className="rounded-3xl border border-white bg-white/95 px-6 py-5 text-center text-2xl font-black shadow-2xl">🌟 {reward}</div></div>}
-    <header className="sticky top-0 z-40 border-b border-slate-100 bg-[#fbfaf7]/95 px-4 pb-4 pt-[max(0.9rem,env(safe-area-inset-top))] shadow-[0_8px_30px_rgba(74,67,91,0.07)] backdrop-blur-xl"><div className="mx-auto grid max-w-5xl grid-cols-[auto_1fr_auto] items-center gap-3"><div className="grid h-12 w-12 place-items-center rounded-2xl border border-violet-100 bg-violet-50 text-violet-500"><Home /></div><div><h1 className="text-2xl font-black leading-none sm:text-3xl">सानुमायाको कथाघर</h1><p className="mt-1 text-xs font-semibold text-slate-500">A private learning and story world made only for Sanumaya</p></div><Heart className="text-amber-300" fill="currentColor" /></div><div className="mx-auto mt-3 grid max-w-5xl grid-cols-2 gap-2 rounded-2xl border border-slate-100 bg-white p-1.5 shadow-sm"><button type="button" onClick={() => setLanguage('ne')} className={`min-h-11 rounded-xl font-black ${language === 'ne' ? 'bg-amber-100 text-amber-900' : 'text-slate-500'}`}>🇳🇵 नेपाली</button><button type="button" onClick={() => setLanguage('en')} className={`min-h-11 rounded-xl font-black ${language === 'en' ? 'bg-sky-100 text-sky-900' : 'text-slate-500'}`}>🇬🇧 English</button></div></header>
-    <main className="mx-auto grid w-full max-w-5xl gap-4 px-3 py-4 sm:px-5">
-      {section === 'learn' && <LearnSection {...{ language, nepaliSet, setNepaliSet, cards, cardIndex, setIndex, card, theme, phrase, previous, next, swipe: cardSwipe, t }} />}
-      {section === 'games' && <GamesSection {...{ language, gameMode, setGameMode, card, phrase, choices, choose, countTarget, chooseCount, previous, next, newRound: () => setGameSeed((value) => value + 1), t }} />}
-      {section === 'stories' && <StoriesSection {...{ language, profile, storybooks, story, page, storyPage, setStoryPage, setStoryId, swipe: storySwipe, t }} />}
-      {section === 'sanumaya' && <PersonalSection {...{ language, profile, draftProfile, setDraftProfile, saveProfile, resetProfile, family, revealed, setRevealed }} />}
-      {section === 'culture' && <CultureSection {...{ language, culture, cultureIndex, setCultureIndex, swipe: cultureSwipe, t }} />}
-    </main>
-    <nav className="fixed bottom-[max(0.55rem,env(safe-area-inset-bottom))] left-1/2 z-50 grid w-[min(calc(100%-1rem),62rem)] -translate-x-1/2 grid-cols-5 gap-1 rounded-3xl border border-slate-100 bg-white/95 p-1.5 shadow-2xl backdrop-blur-xl">{[['learn', Shapes], ['games', RefreshCw], ['stories', BookOpen], ['sanumaya', Users], ['culture', Landmark]].map(([id, Icon]) => <button type="button" key={id} onClick={() => setSection(id)} className={`flex min-h-16 flex-col items-center justify-center gap-1 rounded-2xl px-1 text-[10px] font-black sm:text-xs ${section === id ? 'bg-violet-100 text-violet-800' : 'text-slate-500'}`}><Icon size={21} /><span>{t[id]}</span></button>)}</nav>
-  </div>;
+  const handleSettingsHold = () => {
+    holdTimer.current = setTimeout(() => {
+      setSection('sanumaya');
+    }, 1500); // 1.5 second hold for parental gate
+  };
+
+  const cancelSettingsHold = () => {
+    if (holdTimer.current) clearTimeout(holdTimer.current);
+  };
+
+  if (section === 'home') {
+    return (
+      <div className="relative w-full min-h-[100dvh] bg-gradient-to-b from-[#8fd3f4] to-[#84fab0] flex flex-col items-center justify-center overflow-hidden p-4 select-none">
+        {/* Animated Background Clouds */}
+        <div className="absolute top-10 left-10 w-32 h-10 bg-white/40 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-48 h-16 bg-white/30 rounded-full blur-2xl float-hand"></div>
+        <div className="absolute top-40 right-20 w-24 h-8 bg-white/50 rounded-full blur-lg animate-pulse" style={{ animationDelay: '1s' }}></div>
+        
+        {/* Title Area */}
+        <div className="absolute top-[8vh] z-20 text-center w-full px-4">
+          <h1 className="text-[2.5rem] sm:text-6xl md:text-7xl font-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.1)] tracking-wide leading-tight">
+            {language === 'ne' ? 'सानुमायाको कथाघर' : "Sanumaya's World"}
+          </h1>
+          <p className="mt-2 text-white/90 font-bold text-sm sm:text-lg drop-shadow-sm">
+            {language === 'ne' ? 'रमाइलो संसारमा स्वागत छ!' : 'Welcome to the fun learning world!'}
+          </p>
+        </div>
+
+        {/* Parental Gate & Controls */}
+        <button 
+          onPointerDown={handleSettingsHold}
+          onPointerUp={cancelSettingsHold}
+          onPointerLeave={cancelSettingsHold}
+          className="absolute top-6 right-6 z-30 p-3 sm:p-4 bg-white/20 hover:bg-white/40 active:bg-white/60 backdrop-blur-md rounded-full text-white shadow-lg transition-all"
+          title="Hold for 1.5s to open Settings"
+        >
+          <Settings size={28} />
+        </button>
+
+        <button 
+          onClick={() => setLanguage(language === 'ne' ? 'en' : 'ne')} 
+          className="absolute top-6 left-6 z-30 px-5 py-3 sm:px-6 sm:py-4 bg-white/20 hover:bg-white/40 active:scale-95 backdrop-blur-md rounded-full text-white font-black text-lg sm:text-xl shadow-lg transition-all"
+        >
+          {language === 'ne' ? 'EN' : 'ने'}
+        </button>
+
+        {/* The 4 Giant Portals */}
+        <div className="z-10 grid grid-cols-2 gap-4 sm:gap-6 md:gap-10 w-full max-w-2xl mt-10 sm:mt-16">
+          <button onClick={() => setSection('learn')} className="group relative aspect-square bg-gradient-to-br from-[#ff9a9e] to-[#fecfef] rounded-[2.5rem] sm:rounded-[4rem] border-[6px] border-white/70 shadow-[0_20px_50px_rgba(255,154,158,0.5)] transform transition-transform hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 sm:gap-4 float-hand" style={{ animationDelay: '0s' }}>
+            <span className="text-[5.5rem] sm:text-[6rem] md:text-[7.5rem] font-black text-white drop-shadow-md leading-none pt-4 tracking-tighter">
+              {language === 'ne' ? 'क' : 'ABC'}
+            </span>
+            <span className="text-xl sm:text-3xl font-black text-white/95">{t.learn}</span>
+          </button>
+
+          <button onClick={() => setSection('stories')} className="group relative aspect-square bg-gradient-to-br from-[#a18cd1] to-[#fbc2eb] rounded-[2.5rem] sm:rounded-[4rem] border-[6px] border-white/70 shadow-[0_20px_50px_rgba(161,140,209,0.5)] transform transition-transform hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 sm:gap-4 float-hand" style={{ animationDelay: '0.2s' }}>
+            <BookOpen className="w-16 h-16 sm:w-28 sm:h-28 text-white drop-shadow-md" strokeWidth={2.5} />
+            <span className="text-xl sm:text-3xl font-black text-white/95 mt-2">{t.stories}</span>
+          </button>
+
+          <button onClick={() => setSection('games')} className="group relative aspect-square bg-gradient-to-br from-[#f6d365] to-[#fda085] rounded-[2.5rem] sm:rounded-[4rem] border-[6px] border-white/70 shadow-[0_20px_50px_rgba(246,211,101,0.5)] transform transition-transform hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 sm:gap-4 float-hand" style={{ animationDelay: '0.4s' }}>
+            <Gamepad2 className="w-16 h-16 sm:w-28 sm:h-28 text-white drop-shadow-md" strokeWidth={2.5} />
+            <span className="text-xl sm:text-3xl font-black text-white/95 mt-2">{t.games}</span>
+          </button>
+
+          <button onClick={() => setSection('vocab')} className="group relative aspect-square bg-gradient-to-br from-[#4facfe] to-[#00f2fe] rounded-[2.5rem] sm:rounded-[4rem] border-[6px] border-white/70 shadow-[0_20px_50px_rgba(79,172,254,0.5)] transform transition-transform hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 sm:gap-4 float-hand" style={{ animationDelay: '0.6s' }}>
+            <Landmark className="w-16 h-16 sm:w-28 sm:h-28 text-white drop-shadow-md" strokeWidth={2.5} />
+            <span className="text-xl sm:text-3xl font-black text-white/95 mt-2">{t.vocab}</span>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Active Section View
+  return (
+    <div className="min-h-[100dvh] select-none bg-[#fbfaf7] pb-10 text-slate-700 relative">
+      {/* Floating Home Button */}
+      <button 
+        onClick={() => setSection('home')} 
+        className="fixed top-4 left-4 sm:top-6 sm:left-6 z-50 p-3 sm:p-4 bg-white border-[3.5px] border-slate-100 rounded-[1.2rem] shadow-xl hover:scale-105 active:scale-95 transition-transform text-slate-400 hover:text-violet-500"
+      >
+        <Home size={26} strokeWidth={3} />
+      </button>
+
+      {reward && (
+        <div className="reward-layer pointer-events-none fixed inset-0 z-[100] grid place-items-center bg-slate-900/10 p-4">
+          <div className="rounded-3xl border border-white bg-white/95 px-6 py-5 text-center text-2xl font-black shadow-2xl">
+            🌟 {reward}
+          </div>
+        </div>
+      )}
+
+      <main className="mx-auto grid w-full max-w-5xl gap-4 px-3 pt-24 sm:pt-32 pb-4 sm:px-5">
+        {section === 'learn' && <LearnSection {...{ language, nepaliSet, setNepaliSet, cards, cardIndex, setIndex, card, theme, phrase, previous, next, swipe: cardSwipe, t }} />}
+        {section === 'vocab' && <VocabSection {...{ language, vocabularyCategories, vocabulary, t }} />}
+        {section === 'games' && <GamesSection {...{ language, gameMode, setGameMode, card, phrase, choices, choose, countTarget, chooseCount, previous, next, newRound: () => setGameSeed((value) => value + 1), t }} />}
+        {section === 'stories' && <StoriesSection {...{ language, profile, storybooks, story, page, storyPage, setStoryPage, setStoryId, swipe: storySwipe, t }} />}
+        {section === 'sanumaya' && <PersonalSection {...{ language, profile, draftProfile, setDraftProfile, saveProfile, resetProfile, family, revealed, setRevealed }} />}
+      </main>
+    </div>
+  );
 }

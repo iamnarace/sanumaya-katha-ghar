@@ -1,3 +1,192 @@
+﻿const unsplash = (id) => `https://images.unsplash.com/${id}?q=82&w=1000&auto=format&fit=crop`;
+const commons = (file, width = 1000) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${width}`;
+
+const makeCards = (rows) => rows.map(([letter, word, translation, fallback, image]) => ({
+  letter,
+  word,
+  translation,
+  fallback,
+  image,
+}));
+
+export const vowels = makeCards([
+  ['αñà', 'αñàαñ¿αñ╛αñ░', 'Pomegranate', '≡ƒìÄ', commons('Pomegranate fruit.jpg')],
+  ['αñå', 'αñåαñ«αñ╛', 'Mother', '≡ƒæ⌐ΓÇì≡ƒæº', '/images/family.jpg'],
+  ['αñç', 'αñçαñ¿αÑìαñªαÑìαñ░αÑçαñúαÑÇ', 'Rainbow', '≡ƒîê', '/images/holi.jpg'],
+  ['αñê', 'αñêαñ╢αÑìαñ╡αñ░', 'God', '≡ƒÖÅ', '/images/traditional.jpg'],
+  ['αñë', 'αñëαñ▓αÑìαñ▓αÑü', 'Owl', '≡ƒªë', unsplash('photo-1516339901601-2e1b62dc0c45')],
+  ['αñè', 'αñèαñ¿', 'Wool', '≡ƒº╢', unsplash('photo-1605000797499-95a51c5269ae')],
+  ['αñï', 'αñïαñ╖αñ┐', 'Sage', '≡ƒºÿ', unsplash('photo-1500530855697-b586d89ba3ee')],
+  ['αñÅ', 'αñÅαñò', 'One', '1∩╕ÅΓâú', '/images/stories/wise-day/page-08.svg'],
+  ['αñÉ', 'αñÉαñ¿αñ╛', 'Mirror', '≡ƒ¬₧', unsplash('photo-1618220179428-22790b461013')],
+  ['αñô', 'αñôαñûαñ░', 'Walnut', '≡ƒî░', unsplash('photo-1600185365483-26d7a4cc7519')],
+  ['αñö', 'αñöαñüαñáαÑÇ', 'Ring', '≡ƒÆì', unsplash('photo-1605100804763-247f67b3557e')],
+  ['αñàαñé', 'αñàαñéαñùαÑüαñ░', 'Grapes', '≡ƒìç', unsplash('photo-1537640538966-79f369143f8f')],
+  ['αñàαñâ', 'αñàαñâ!', 'A surprised sound', '≡ƒÿ«', '/images/bench.jpg'],
+]);
+
+export const consonants = makeCards([
+  ['αñò', 'αñòαñ▓αñ«', 'Pen', '≡ƒûè∩╕Å', unsplash('photo-1583485088034-697b5bc54ccd')],
+  ['αñû', 'αñûαñ░αñ╛αñ»αÑï', 'Rabbit', '≡ƒÉ░', unsplash('photo-1585110396000-c9ffd4e4b308')],
+  ['αñù', 'αñùαñ«αñ▓αñ╛', 'Flowerpot', '≡ƒ¬┤', unsplash('photo-1485955900006-10f4d324d411')],
+  ['αñÿ', 'αñÿαñ░', 'House', '≡ƒÅá', unsplash('photo-1518780664697-55e3ad937233')],
+  ['αñÖ', 'αñ«αñ╕αñùαÑçαñíαÑÇ', 'Traditional symbol', '≡ƒöñ', unsplash('photo-1574316071802-0d684efa7bf5')],
+  ['αñÜ', 'αñÜαñ░αñ╛', 'Bird', '≡ƒÉª', unsplash('photo-1444464666168-49d633b867ad')],
+  ['αñ¢', 'αñ¢αñ╛αññαñ╛', 'Umbrella', 'Γÿé∩╕Å', unsplash('photo-1534308983496-4fabb1a015ee')],
+  ['αñ£', 'αñ£αñù', 'Jug', '≡ƒ½ù', unsplash('photo-1574633062371-951956a37d3f')],
+  ['αñ¥', 'αñ¥αñ¿αÑìαñíαñ╛', 'Flag', '≡ƒç│≡ƒç╡', unsplash('photo-1532375810709-75b1da00537c')],
+  ['αñ₧', 'αñùαÑïαñ░αÑüαñ╕αñ┐αñéαñùαÑç', 'Traditional symbol', '≡ƒöñ', unsplash('photo-1546484396-fb3fc6f95f98')],
+  ['αñƒ', 'αñƒαÑïαñ¬αÑÇ', 'Hat', '≡ƒºó', unsplash('photo-1521369984125-650de01b2e86')],
+  ['αñá', 'αñáαñíαÑçαñëαñ░αÑï', 'Traditional object', '≡ƒ¬╡', unsplash('photo-1590644365607-1c5a519a7a37')],
+  ['αñí', 'αñíαñ«αñ░αÑü', 'Small drum', '≡ƒÑü', unsplash('photo-1511671782779-c97d3d27a1d4')],
+  ['αñó', 'αñóαñòαÑÇ', 'Basket', '≡ƒº║', unsplash('photo-1595246140625-573b715d11dc')],
+  ['αñú', 'αññαñ┐αñ¿αñºαñ░αÑìαñòαÑç', 'Traditional symbol', '≡ƒöñ', unsplash('photo-1509228468518-180dd4864904')],
+  ['αññ', 'αññαñ¼αñ▓αñ╛', 'Tabla', '≡ƒÑü', unsplash('photo-1519892300165-cb5542fb47c7')],
+  ['αñÑ', 'αñÑαñ░αñ«αñ╕', 'Thermos', '≡ƒº┤', unsplash('photo-1544816155-12df9643f363')],
+  ['αñª', 'αñªαñ░αñ╛αñ£', 'Cupboard', '≡ƒÜ¬', unsplash('photo-1595428774223-ef52624120d2')],
+  ['αñº', 'αñºαñ¿αÑüαñ╖', 'Bow', '≡ƒÅ╣', unsplash('photo-1511367461989-f85a21fda167')],
+  ['αñ¿', 'αñ¿αñ░αñ┐αñ╡αñ▓', 'Coconut', '≡ƒÑÑ', unsplash('photo-1543362906-acfc16c67564')],
+  ['αñ¬', 'αñ¬αñ░αÑçαñ╡αñ╛', 'Pigeon', '≡ƒòè∩╕Å', unsplash('photo-1509651044110-14660346dc37')],
+  ['αñ½', 'αñ½αñ▓αñ½αÑéαñ▓', 'Fruits', '≡ƒìÄ', unsplash('photo-1610832958506-aa56368176cf')],
+  ['αñ¼', 'αñ¼αñ╕', 'Bus', '≡ƒÜî', unsplash('photo-1544620347-c4fd4a3d5957')],
+  ['αñ¡', 'αñ¡αñòαÑüαñúαÑìαñíαÑï', 'Ball', 'ΓÜ╜', unsplash('photo-1614632537197-38a17061c2bd')],
+  ['αñ«', 'αñ«αñ»αÑüαñ░', 'Peacock', '≡ƒªÜ', unsplash('photo-1536514072410-5019a3c69182')],
+  ['αñ»', 'αñ»αñ£αÑìαñ₧', 'Holy fire', '≡ƒöÑ', unsplash('photo-1563290680-3665780f2d80')],
+  ['αñ░', 'αñ░αñÑ', 'Chariot', '≡ƒ¢║', unsplash('photo-1582234372722-50d7ccc30ebd')],
+  ['αñ▓', 'αñ▓αñ╕αÑüαñ¿', 'Garlic', '≡ƒºä', unsplash('photo-1540148426945-6cf22a6b2383')],
+  ['αñ╡', 'αñ╡αñòαñ┐αñ▓', 'Lawyer', 'ΓÜû∩╕Å', unsplash('photo-1589829545856-d10d557cf95f')],
+  ['αñ╢', 'αñ╢αñéαñû', 'Conch', '≡ƒÉÜ', '/images/stories/wise-day/page-09.svg'],
+  ['αñ╖', 'αñ╖αñƒαÑìαñòαÑïαñú', 'Hexagon', 'Γ¼í', '/images/stories/wise-day/page-07.svg'],
+  ['αñ╕', 'αñ╕αñ╛αñ¿αÑüαñ«αñ╛αñ»αñ╛', 'Sanumaya', '≡ƒÆû', '/images/bench.jpg'],
+  ['αñ╣', 'αñ╣αñ▓αÑï', 'Plough', '≡ƒî╛', unsplash('photo-1500382017468-9049fed747ef')],
+  ['αñòαÑìαñ╖', 'αñòαÑìαñ╖αññαÑìαñ░αÑÇ', 'Warrior', '≡ƒ¢í∩╕Å', unsplash('photo-1599422314077-f4dfdaa4cd09')],
+  ['αññαÑìαñ░', 'αññαÑìαñ░αñ┐αñ╢αÑüαñ▓', 'Trident', '≡ƒö▒', '/images/traditional.jpg'],
+  ['αñ£αÑìαñ₧', 'αñ£αÑìαñ₧αñ╛αñ¿αÑÇ', 'Wise', '≡ƒôÜ', '/images/stories/wise-day/page-01.svg'],
+]);
+
+const englishRows = [
+  ['A', 'Apple', '≡ƒìÄ', '/images/stories/wise-day/page-06.svg'],
+  ['B', 'Ball', 'ΓÜ╜', unsplash('photo-1614632537197-38a17061c2bd')],
+  ['C', 'Cat', '≡ƒÉ▒', unsplash('photo-1518791841217-8f162f1e1131')],
+  ['D', 'Dog', '≡ƒÉ╢', unsplash('photo-1552053831-71594a27632d')],
+  ['E', 'Elephant', '≡ƒÉÿ', unsplash('photo-1557050543-4d5f4e07ef46')],
+  ['F', 'Flower', '≡ƒî╕', '/images/rose.jpg'],
+  ['G', 'Garden', '≡ƒî╗', '/images/rose.jpg'],
+  ['H', 'House', '≡ƒÅá', unsplash('photo-1518780664697-55e3ad937233')],
+  ['I', 'Ice cream', '≡ƒìª', unsplash('photo-1563805042-7684c019e1cb')],
+  ['J', 'Juice', '≡ƒºâ', unsplash('photo-1600271886742-f049cd451bba')],
+  ['K', 'Kite', '≡ƒ¬ü', '/images/stories/wise-day/page-07.svg'],
+  ['L', 'Lotus', '≡ƒ¬╖', unsplash('photo-1473445361085-b9a07f55608b')],
+  ['M', 'Moon', '≡ƒîÖ', '/images/stories/wise-day/page-10.svg'],
+  ['N', 'Nest', '≡ƒ¬║', unsplash('photo-1497206365907-f5e630693df0')],
+  ['O', 'Orange', '≡ƒìè', unsplash('photo-1547514701-42782101795e')],
+  ['P', 'Parrot', '≡ƒª£', unsplash('photo-1552728089-57bdde30beb3')],
+  ['Q', 'Queen', '≡ƒææ', unsplash('photo-1594736797933-d0501ba2fe65')],
+  ['R', 'Rabbit', '≡ƒÉ░', unsplash('photo-1585110396000-c9ffd4e4b308')],
+  ['S', 'Sanumaya', '≡ƒÆû', '/images/bench.jpg'],
+  ['T', 'Tiger', '≡ƒÉ»', unsplash('photo-1561731216-c3a4d99437d5')],
+  ['U', 'Umbrella', 'Γÿé∩╕Å', unsplash('photo-1534308983496-4fabb1a015ee')],
+  ['V', 'Van', '≡ƒÜÉ', unsplash('photo-1533473359331-0135ef1b58bf')],
+  ['W', 'Water', '≡ƒÆº', unsplash('photo-1507525428034-b723cf961d3e')],
+  ['X', 'Xylophone', '≡ƒÄ╝', unsplash('photo-1520523839897-bd0b52f945a0')],
+  ['Y', 'Yak', '≡ƒÉé', unsplash('photo-1518877593221-1f28583780b4')],
+  ['Z', 'Zebra', '≡ƒªô', unsplash('photo-1501706362039-c6e80948bb7d')],
+];
+
+export const english = englishRows.map(([letter, word, fallback, image]) => ({
+  letter,
+  word,
+  translation: '',
+  fallback,
+  image,
+}));
+
+
+export const storybooks = [
+  {
+    id: 'wise-day',
+    titleNe: 'αñ£αÑìαñ₧αñ╛αñ¿αÑÇ {name} αñòαÑï αñªαñ┐αñ¿',
+    titleEn: "Wise {name}'s Day",
+    subtitleNe: 'αñ¼αñ╛αñ¿αÑÇ, αñ¬αÑìαñ░αñòαÑâαññαñ┐, αñåαñòαñ╛αñ░, αñùαñ¿αÑìαññαÑÇ αñ░ αñ╕αñéαñ╕αÑìαñòαñ╛αñ░',
+    subtitleEn: 'Habits, nature, shapes, counting and culture',
+    cover: '/images/stories/wise-day/page-01.svg',
+    fallback: '≡ƒôû',
+    pages: [
+      ['/images/stories/wise-day/page-01.svg', 'αñ»αÑï {name} αñ╣αÑïαÑñ αñåαñ£ αñ╣αñ╛αñ«αÑÇ αñëαñ¿αñòαÑï αñ░αñ«αñ╛αñçαñ▓αÑï αñªαñ┐αñ¿ αñ╣αÑçαñ░αÑìαñ¢αÑîαñüαÑñ', 'This is {name}. Let us follow her lovely day.', 'αñ¬αÑìαñ»αñ╛αñ░αÑï αñ╕αñ╛αñ¿αÑï αñòαñÑαñ╛', 'A lovely little story'],
+      ['/images/stories/wise-day/page-02.svg', 'αñ¼αñ┐αñ╣αñ╛αñ¿ αñ¡αñ»αÑïαÑñ {name} αñ▓αÑç αñªαñ╛αñüαññ αñ«αñ╛αñ¥αñ┐αñ¿αÑìαÑñ', 'Morning came. {name} brushed her teeth.', 'αñÜαñ┐αñ▓αñ┐αñ¬-αñÜαñ┐αñ▓αñ┐αñ¬!', 'Brush, brush!'],
+      ['/images/stories/wise-day/page-03.svg', 'αñ¬αñ╣αÑçαñ▓αÑï αñÿαñ╛αñ« αñåαñ»αÑïαÑñ {name} αñ▓αÑç αñ╣αñ╛αññ αñ╣αñ▓αÑìαñ▓αñ╛αñëαñüαñªαÑê αñ¡αñ¿αñ┐αñ¿αÑìΓÇö αñ¿αñ«αñ╕αÑìαññαÑç!', 'The yellow sun came up. {name} waved and said, ΓÇ£Namaste!ΓÇ¥', 'αñÿαñ╛αñ« αñ▓αñ╛αñùαÑìαñ»αÑï!', 'Hello, sunshine!'],
+      ['/images/stories/wise-day/page-04.svg', 'αñûαñ╛αñ£αñ╛ αñàαñÿαñ┐ αñ╕αñ╛αñ¼αÑüαñ¿ αñ░ αñ¬αñ╛αñ¿αÑÇαñ▓αÑç αñ╣αñ╛αññ αñºαÑïαñöαñüαÑñ', 'Before snack time, let us wash our hands with soap and water.', 'αñ¢αÑìαñ»αñ╛αñ¬-αñ¢αÑìαñ»αñ╛αñ¬!', 'Splash, splash!'],
+      ['/images/stories/wise-day/page-05.svg', 'αñ¼αñùαÑêαñüαñÜαñ╛αñ«αñ╛ αñ╕αÑçαññαÑï αñ¼αñòαÑüαñ▓αÑìαñ▓αñ╛ αñåαñ»αÑïαÑñ {name} αñ▓αÑç αñ¿αñ«αñ╕αÑìαññαÑç αñùαñ░αñ┐αñ¿αÑìαÑñ', 'A white crane came to the garden. {name} said Namaste.', 'αñ╡αñ╛αñò-αñ╡αñ╛αñò!', 'Wak, wak!'],
+      ['/images/stories/wise-day/page-06.svg', '{name} αñ▓αÑç αñ░αñ╛αññαÑï αñ╕αÑìαñ»αñ╛αñë αñûαñ╛αñçαñ¿αÑìαÑñ αñ╕αÑìαñ»αñ╛αñë αñ«αÑÇαñáαÑï αñ░ αñ╕αÑìαñ╡αñ╕αÑìαñÑ αñ¢αÑñ', '{name} ate a red apple. Apples are sweet and healthy.', 'αñòαÑüαñ░αÑüαñ«-αñòαÑüαñ░αÑüαñ«!', 'Crunch, crunch!'],
+      ['/images/stories/wise-day/page-07.svg', 'αñåαñòαñ╛αñ╢αñ«αñ╛ αñ╖αñƒαÑìαñòαÑïαñú αñåαñòαñ╛αñ░αñòαÑï αñÜαñÖαÑìαñùαñ╛ αñëαñíαÑìαñ»αÑïαÑñ', 'A hexagon-shaped kite flew in the sky.', 'αñ╣αÑçαñ░, αñ╣αÑçαñ░!', 'Look, look!'],
+      ['/images/stories/wise-day/page-08.svg', '{name} αñ▓αÑç αñ½αÑéαñ▓ αñùαñ¿αñ┐αñ¿αÑìΓÇö αñÅαñò, αñªαÑüαñê, αññαÑÇαñ¿!', '{name} counted the flowersΓÇöone, two, three!', 'αÑº, αÑ¿, αÑ⌐!', 'One, two, three!'],
+      ['/images/stories/wise-day/page-09.svg', 'αñ¼αñ┐αñ░αñ▓αÑç αñ╢αñéαñû αñ½αÑüαñòαÑìαñ»αÑïαÑñ {name} αñ▓αÑç αñáαÑéαñ▓αÑï αñåαñ╡αñ╛αñ£ αñ╕αÑüαñ¿αñ┐αñ¿αÑìαÑñ', 'Bir blew the conch. {name} heard its big sound.', 'αñ½αÑéαñü... αñ½αÑéαñü...!', 'Phoo... phoo...!'],
+      ['/images/stories/wise-day/page-10.svg', 'αñ£αÑéαñ¿ αñ░ αññαñ╛αñ░αñ╛ αñåαñÅαÑñ αñ╢αÑüαñ¡ αñ░αñ╛αññαÑìαñ░αÑÇ, {nickname}!', 'The moon and stars came out. Good night, {nickname}!', 'αñ╢αÑüαñ¡ αñ░αñ╛αññαÑìαñ░αÑÇ!', 'Good night!'],
+    ],
+  },
+  {
+    id: 'red-flower',
+    titleNe: '{name} αñ░ αñ░αñ╛αññαÑï αñ½αÑéαñ▓',
+    titleEn: '{name} and the Red Flower',
+    subtitleNe: 'αñ░αñÖ, αñ½αÑéαñ▓, αñÜαñ░αñ╛ αñ░ αñ¬αñ░αñ┐αñ╡αñ╛αñ░',
+    subtitleEn: 'Colours, flowers, birds and family',
+    cover: '/images/rose.jpg',
+    fallback: '≡ƒî╣',
+    pages: [
+      ['/images/rose.jpg', 'αñ¼αñ┐αñ╣αñ╛αñ¿ {name} αñ½αÑéαñ▓αñ¼αñ╛αñ░αÑÇαñ«αñ╛ αñùαñçαñ¿αÑìαÑñ', 'One morning, {name} went to the garden.', 'αñ╕αÑüαñ¿αÑìαñªαñ░ αñ¼αñ┐αñ╣αñ╛αñ¿', 'A beautiful morning'],
+      ['/images/rose.jpg', '{name} αñ▓αÑç αñáαÑéαñ▓αÑï αñ░αñ╛αññαÑï αñ½αÑéαñ▓ αñªαÑçαñûαñ┐αñ¿αÑìαÑñ', '{name} saw a big red flower.', 'αñ░αñ╛αññαÑï αñ½αÑéαñ▓!', 'A red flower!'],
+      ['/images/stories/wise-day/page-05.svg', 'αñ╕αñ╛αñ¿αÑï αñÜαñ░αñ╛ αñ░ αñ½αÑéαñ▓αñ▓αÑç {nickname} αñ▓αñ╛αñê αñ╕αÑìαñ╡αñ╛αñùαññ αñùαñ░αÑçαÑñ', 'A little bird and the flowers welcomed {nickname}.', 'αñÜαñ┐αñëαñü-αñÜαñ┐αñëαñü!', 'Chirp, chirp!'],
+      ['/images/bench.jpg', '{nickname} αñûαÑüαñ╢αÑÇαñ▓αÑç αñ╣αñ╛αñüαñ╕αñ┐αñ¿αÑìαÑñ', '{nickname} smiled with joy.', 'αñ╣αñ╛ αñ╣αñ╛ αñ╣αñ╛!', 'Ha ha ha!'],
+      ['/images/family.jpg', 'αñåαñ«αñ╛ αñ░ αñ¼αÑüαñ╡αñ╛αñ▓αÑç αñ¡αñ¿αÑçΓÇö αñ╕αÑìαñ»αñ╛αñ¼αñ╛αñ╕ {nickname}!', 'Mum and Dad saidΓÇöwell done, {nickname}!', 'αñ╕αÑìαñ»αñ╛αñ¼αñ╛αñ╕!', 'Well done!'],
+    ],
+  },
+  {
+    id: 'nepal',
+    titleNe: '{name} αñòαÑï αñ¿αÑçαñ¬αñ╛αñ▓ αñ»αñ╛αññαÑìαñ░αñ╛',
+    titleEn: "{name}'s Nepal Adventure",
+    subtitleNe: 'αñ╣αñ┐αñ«αñ╛αñ▓, αñ¿αñ«αñ╕αÑìαññαÑç, αñ╕αñéαñ╕αÑìαñòαÑâαññαñ┐ αñ░ αñ¬αñ░αñ┐αñ╡αñ╛αñ░',
+    subtitleEn: 'Mountains, Namaste, culture and family',
+    cover: '/images/traditional.jpg',
+    fallback: '≡ƒç│≡ƒç╡',
+    pages: [
+      ['/images/stories/wise-day/page-01.svg', '{name} αñ¿αÑçαñ¬αñ╛αñ▓αñòαÑï αñ¬αñ╣αñ╛αñíαññαñ┐αñ░ αñùαñçαñ¿αÑìαÑñ', '{name} travelled towards the hills of Nepal.', 'αñ¿αÑçαñ¬αñ╛αñ▓ αñ»αñ╛αññαÑìαñ░αñ╛', 'Nepal adventure'],
+      ['/images/stories/wise-day/page-03.svg', 'αñƒαñ╛αñóαñ╛ αñ╕αÑçαññαñ╛ αñ╣αñ┐αñ«αñ╛αñ▓ αñ░ αñ¬αñ╣αÑçαñ▓αÑï αñÿαñ╛αñ« αñªαÑçαñûαñ┐αñÅαÑñ', 'Snowy mountains and a yellow sun appeared in the distance.', 'αñ╣αñ┐αñ«αñ╛αñ▓!', 'Mountains!'],
+      ['/images/traditional.jpg', '{nickname} αñ▓αÑç αñ¿αÑçαñ¬αñ╛αñ▓αÑÇ αñ▓αÑüαñùαñ╛ αñ▓αñùαñ╛αñçαñ¿αÑìαÑñ', '{nickname} wore Nepali clothes.', 'αñòαññαñ┐ αñ╕αÑüαñ¿αÑìαñªαñ░!', 'So beautiful!'],
+      ['/images/stories/wise-day/page-09.svg', 'αñ¼αñ┐αñ░αñ▓αÑç αñ╢αñéαñû αñ½αÑüαñòαÑìαñ»αÑïαÑñ αñ╕αñ¼αÑêαñ▓αÑç αñ¿αñ«αñ╕αÑìαññαÑç αñùαñ░αÑçαÑñ', 'Bir blew the conch and everyone said Namaste.', 'αñ½αÑéαñü... αñ½αÑéαñü...!', 'Phoo... phoo...!'],
+      ['/images/family.jpg', 'αñ¬αñ░αñ┐αñ╡αñ╛αñ░αñ╕αñüαñùαñòαÑï αñ»αñ╛αññαÑìαñ░αñ╛ αñ╕αñ¼αÑêαñ¡αñ¿αÑìαñªαñ╛ αñ¬αÑìαñ»αñ╛αñ░αÑï αñ¡αñ»αÑïαÑñ', 'The family journey was the most special part.', 'αñ«αÑçαñ░αÑï αñ¬αñ░αñ┐αñ╡αñ╛αñ░', 'My family'],
+    ],
+  },
+];
+
+export const family = [
+  ['αñåαñ«αñ╛, αñ¼αÑüαñ╡αñ╛ αñ░ αñ╕αñ╛αñ¿αÑüαñ«αñ╛αñ»αñ╛', 'Mum, Dad and Sanumaya', '/images/family.jpg', '≡ƒæ¿ΓÇì≡ƒæ⌐ΓÇì≡ƒæº'],
+  ['αñ╣αñ£αÑüαñ░αñ¼αñ╛', 'Grandfather', '', '≡ƒæ┤'],
+  ['αñ╣αñ£αÑüαñ░αñåαñ«αñ╛', 'Grandmother', '', '≡ƒæ╡'],
+  ['αñ«αñ╛αñ«αñ╛', 'Maternal uncle', '', '≡ƒºö'],
+  ['αñ«αñ╛αñçαñ£αÑü', 'Aunt', '', '≡ƒæ⌐'],
+].map(([ne, en, image, fallback], id) => ({ id, ne, en, image, fallback }));
+
+export const defaultProfile = {
+  name: 'αñ╕αñ╛αñ¿αÑüαñ«αñ╛αñ»αñ╛',
+  englishName: 'Sanumaya',
+  nickname: 'αñ╕αñ╛αñ¿αÑü',
+  favouriteAnimal: 'αñûαñ░αñ╛αñ»αÑï',
+  favouriteColor: 'αñùαÑüαñ▓αñ╛αñ¼αÑÇ',
+  homePlace: 'Sydney',
+};
+
+
+export const vocabularyCategories = [
+  { id: 'animals', nameNe: 'जनावरहरू', nameEn: 'Animals', color: '#ff9a9e', toColor: '#fecfef' },
+  { id: 'food', nameNe: 'खाना र फलफूल', nameEn: 'Food & Fruits', color: '#f6d365', toColor: '#fda085' },
+  { id: 'vegetables', nameNe: 'तरकारीहरू', nameEn: 'Vegetables', color: '#84fab0', toColor: '#8fd3f4' },
+  { id: 'body', nameNe: 'शरीरका अंगहरू', nameEn: 'Body Parts', color: '#a18cd1', toColor: '#fbc2eb' },
+  { id: 'home', nameNe: 'मेरो घर', nameEn: 'My Home', color: '#5ee7df', toColor: '#b490ca' },
+  { id: 'kitchen', nameNe: 'भान्सा', nameEn: 'Kitchen', color: '#ff758c', toColor: '#ff7eb3' },
+  { id: 'actions', nameNe: 'काम बुझाउने', nameEn: 'Action Words', color: '#8fd3f4', toColor: '#84fab0' },
+  { id: 'culture', nameNe: 'संस्कार', nameEn: 'Culture', color: '#5ee7df', toColor: '#b490ca' },
+];
+
 export const vocabulary = [
   // Animals
   { id: 'v1', category: 'animals', ne: 'गाई', en: 'Cow', image: '/images/vocab/Cow.jpeg', fallback: '🐄' },
@@ -49,14 +238,12 @@ export const vocabulary = [
   { id: 'v43', category: 'actions', ne: 'हाँस्नु', en: 'Laugh', image: '/images/vocab/Laugh.jpeg', fallback: '😄' },
   { id: 'v44', category: 'actions', ne: 'हिँड्नु', en: 'Walk', image: '/images/vocab/Walk.jpeg', fallback: '🚶' },
   { id: 'v45', category: 'actions', ne: 'दौडिनु', en: 'Run', image: '/images/vocab/Run.jpeg', fallback: '🏃' },
-
   // Vegetables
   { id: 'v_v1', category: 'vegetables', ne: 'आलु', en: 'Potato', image: '/images/vocab/Potato.jpeg', fallback: '🥔' },
   { id: 'v_v2', category: 'vegetables', ne: 'प्याज', en: 'Onion', image: '/images/vocab/Onion.jpeg', fallback: '🧅' },
   { id: 'v_v3', category: 'vegetables', ne: 'गाजर', en: 'Carrot', image: '/images/vocab/Carrot.jpeg', fallback: '🥕' },
   { id: 'v_v4', category: 'vegetables', ne: 'काउली', en: 'Cauliflower', image: '/images/vocab/Cauliflower.jpeg', fallback: '🥦' },
   { id: 'v_v5', category: 'vegetables', ne: 'साग', en: 'Spinach', image: '/images/vocab/Spinach.jpeg', fallback: '🥬' },
-
   // New Animals
   { id: 'v_a11', category: 'animals', ne: 'भैंसी', en: 'Buffalo', image: '/images/vocab/Buffalo.jpeg', fallback: '🐃' },
   { id: 'v_a12', category: 'animals', ne: 'बाख्रा', en: 'Goat', image: '/images/vocab/Goat.jpeg', fallback: '🐐' },
@@ -64,7 +251,6 @@ export const vocabulary = [
   { id: 'v_a14', category: 'animals', ne: 'भालु', en: 'Bear', image: '/images/vocab/Bear.jpeg', fallback: '🐻' },
   { id: 'v_a15', category: 'animals', ne: 'खरायो', en: 'Rabbit', image: '/images/vocab/Rabbit.jpeg', fallback: '🐰' },
   { id: 'v_a16', category: 'animals', ne: 'साँप', en: 'Snake', image: '/images/vocab/Snake.jpeg', fallback: '🐍' },
-
   // New Body Parts
   { id: 'v_b10', category: 'body', ne: 'जिब्रो', en: 'Tongue', image: '/images/vocab/Tongue.jpeg', fallback: '👅' },
   { id: 'v_b11', category: 'body', ne: 'औंला', en: 'Finger', image: '/images/vocab/Finger.jpeg', fallback: '☝️' },
@@ -72,14 +258,12 @@ export const vocabulary = [
   { id: 'v_b13', category: 'body', ne: 'पिठ्यूँ', en: 'Back', image: '/images/vocab/Back.jpeg', fallback: '🔙' },
   { id: 'v_b14', category: 'body', ne: 'छाती', en: 'Chest', image: '/images/vocab/Chest.jpeg', fallback: '👕' },
   { id: 'v_b15', category: 'body', ne: 'बाहु', en: 'Arm', image: '/images/vocab/Arm.jpeg', fallback: '💪' },
-
   // Kitchen
   { id: 'v_k1', category: 'kitchen', ne: 'ब्लेन्डर', en: 'Blender', image: '/images/vocab/Blender.jpeg', fallback: '🌪️' },
   { id: 'v_k2', category: 'kitchen', ne: 'कचौरा', en: 'Bowl', image: '/images/vocab/Bowl.jpeg', fallback: '🥣' },
   { id: 'v_k3', category: 'kitchen', ne: 'गिलास', en: 'Glass', image: '/images/vocab/Glass.jpeg', fallback: '🥛' },
   { id: 'v_k4', category: 'kitchen', ne: 'जग', en: 'Jug', image: '/images/vocab/Jug.jpeg', fallback: '🫙' },
   { id: 'v_k5', category: 'kitchen', ne: 'चक्कु', en: 'Knife', image: '/images/vocab/Knife.jpeg', fallback: '🔪' },
-
   // Culture
   { id: 'v_c1', category: 'culture', ne: 'नमस्ते', en: 'Namaste', image: '/images/vocab/Namaste.jpeg', fallback: '🙏' },
   { id: 'v_c2', category: 'culture', ne: 'गणेश भगवान', en: 'Lord Ganesha', image: '/images/vocab/Ganesha.jpeg', fallback: '🕉️' },

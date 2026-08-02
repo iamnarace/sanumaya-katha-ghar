@@ -165,16 +165,6 @@ export default function App() {
         <div className="absolute bottom-20 right-10 w-48 h-16 bg-white/30 rounded-full blur-2xl float-hand"></div>
         <div className="absolute top-40 right-20 w-24 h-8 bg-white/50 rounded-full blur-lg animate-pulse" style={{ animationDelay: '1s' }}></div>
         
-        {/* Title Area */}
-        <div className="absolute top-[5vh] sm:top-[8vh] z-20 text-center w-full px-4">
-          <h1 className="text-[2.5rem] sm:text-6xl md:text-7xl font-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.1)] tracking-wide leading-tight">
-            {language === 'ne' ? 'सानुमायाको कथाघर' : "Sanumaya's World"}
-          </h1>
-          <p className="mt-1 sm:mt-2 text-white/90 font-bold text-sm sm:text-lg drop-shadow-sm">
-            {language === 'ne' ? 'रमाइलो संसारमा स्वागत छ!' : 'Welcome to the fun learning world!'}
-          </p>
-        </div>
-
         {/* Personalized Stickers */}
         <img src="/images/stickers/waving.png" className="absolute top-32 left-4 sm:left-12 w-24 sm:w-32 opacity-80 mix-blend-multiply -rotate-12 float-hand z-10" alt="" />
         <img src="/images/stickers/laughing.png" className="absolute top-24 right-4 sm:right-16 w-24 sm:w-32 opacity-80 mix-blend-multiply rotate-12 float-hand z-10" style={{ animationDelay: '1s' }} alt="" />
@@ -186,7 +176,7 @@ export default function App() {
           onPointerDown={handleSettingsHold}
           onPointerUp={cancelSettingsHold}
           onPointerLeave={cancelSettingsHold}
-          className="absolute top-6 right-6 z-30 p-3 sm:p-4 bg-white/20 hover:bg-white/40 active:bg-white/60 backdrop-blur-md rounded-full text-white shadow-lg transition-all"
+          className="absolute top-6 right-6 z-40 p-3 sm:p-4 bg-white/20 hover:bg-white/40 active:bg-white/60 backdrop-blur-md rounded-full text-white shadow-lg transition-all"
           title="Hold for 1.5s to open Settings"
         >
           <Settings size={28} />
@@ -194,13 +184,26 @@ export default function App() {
 
         <button 
           onClick={() => setLanguage(language === 'ne' ? 'en' : 'ne')} 
-          className="absolute top-6 left-6 z-30 px-5 py-3 sm:px-6 sm:py-4 bg-white/20 hover:bg-white/40 active:scale-95 backdrop-blur-md rounded-full text-white font-black text-lg sm:text-xl shadow-lg transition-all"
+          className="absolute top-6 left-6 z-40 px-5 py-3 sm:px-6 sm:py-4 bg-white/20 hover:bg-white/40 active:scale-95 backdrop-blur-md rounded-full text-white font-black text-lg sm:text-xl shadow-lg transition-all"
         >
           {language === 'ne' ? 'EN' : 'ने'}
         </button>
+        
+        {/* Main Content Wrapper (Centers title and grid together) */}
+        <div className="relative z-20 flex flex-col items-center justify-center w-full max-w-2xl gap-6 sm:gap-10 mt-12 sm:mt-0">
+          
+          {/* Title Area */}
+          <div className="text-center w-full px-2">
+            <h1 className="text-[2.5rem] sm:text-6xl md:text-7xl font-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.1)] tracking-wide leading-tight">
+              {language === 'ne' ? 'सानुमायाको कथाघर' : "Sanumaya's World"}
+            </h1>
+            <p className="mt-2 text-white/90 font-bold text-sm sm:text-lg drop-shadow-sm">
+              {language === 'ne' ? 'रमाइलो संसारमा स्वागत छ!' : 'Welcome to the fun learning world!'}
+            </p>
+          </div>
 
-        {/* The 4 Giant Portals */}
-        <div className="z-10 grid grid-cols-2 gap-4 sm:gap-6 md:gap-10 w-full max-w-2xl mt-16 sm:mt-20">
+          {/* The 4 Giant Portals */}
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-10 w-full z-10">
           <button onClick={() => setSection('learn')} className="group relative aspect-square bg-gradient-to-br from-[#ff9a9e] to-[#fecfef] rounded-[2.5rem] sm:rounded-[4rem] border-[6px] border-white/70 shadow-[0_20px_50px_rgba(255,154,158,0.5)] transform transition-transform hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 sm:gap-4 float-hand" style={{ animationDelay: '0s' }}>
             <span className="text-[5.5rem] sm:text-[6rem] md:text-[7.5rem] font-black text-white drop-shadow-md leading-none pt-4 tracking-tighter">
               {language === 'ne' ? 'क' : 'ABC'}

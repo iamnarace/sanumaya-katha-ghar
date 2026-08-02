@@ -1,9 +1,28 @@
-import { useState } from 'react';
-import { BookOpen, ChevronLeft, ChevronRight, CornerUpLeft, Volume2, Maximize, Share2, Download, X } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { BookOpen, ChevronLeft, ChevronRight, CornerUpLeft, Volume2, Maximize, Minimize, Share2, Download, X } from 'lucide-react';
 import { Arrow, AudioBadge, personalize, SafeImage } from '../ui.jsx';
 
 export default function StoriesSection({ language, profile, storybooks, story, page, storyPage, setStoryPage, setStoryId, swipe, t }) {
   const [isReading, setIsReading] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  const toggleFullscreen = async () => {
+    if (!document.fullscreenElement) {
+      await containerRef.current?.requestFullscreen?.();
+    } else {
+      await document.exitFullscreen?.();
+    }
+  };
+
   const nextPage = () => setStoryPage((value) => value === story.pages.length - 1 ? 0 : value + 1);
   const prevPage = () => setStoryPage((value) => Math.max(0, value - 1));
 
@@ -37,7 +56,7 @@ export default function StoriesSection({ language, profile, storybooks, story, p
 
     {/* Book Flipbook Viewer */}
     {isReading && (
-    <section {...swipe} className="relative w-full mx-auto mt-6 rounded-3xl border border-slate-200 bg-white shadow-2xl overflow-hidden flex flex-col">
+    <section {...swipe} ref={containerRef} className={`relative w-full mx-auto ${isFullscreen ? '' : 'mt-6 rounded-3xl border border-slate-200 shadow-2xl'} bg-white overflow-hidden flex flex-col h-full`}>
       {/* Top Navigation Bar */}
       <div className="flex flex-wrap items-center justify-between px-4 py-3 bg-white border-b border-slate-100 gap-y-3">
          <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
@@ -60,7 +79,9 @@ export default function StoriesSection({ language, profile, storybooks, story, p
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3 text-slate-400 w-full sm:w-auto justify-end">
-           <button className="p-2 hover:text-slate-800 transition-colors hidden sm:block"><Maximize size={20}/></button>
+           <button onClick={toggleFullscreen} className="p-2 hover:text-slate-800 transition-colors hidden sm:block">
+             {isFullscreen ? <Minimize size={20}/> : <Maximize size={20}/>}
+           </button>
            <button className="p-2 hover:text-slate-800 transition-colors hidden sm:block"><Download size={20}/></button>
            <button className="p-2 hover:text-slate-800 transition-colors hidden sm:block"><Share2 size={20}/></button>
            <button className="flex items-center gap-1.5 sm:gap-2 bg-blue-50 text-blue-600 px-3 py-1.5 rounded-full font-bold text-xs sm:text-sm hover:bg-blue-100 transition-colors">

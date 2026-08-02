@@ -165,8 +165,8 @@ export const storybooks = [
     pages: [
       ['/images/stories/sharing/page-01.jpg', '{name}सँग धेरै खेलौना छन्।', '{name} has many toys.'],
       ['/images/stories/sharing/page-02.jpg', 'उनको साथी खेल्न आयो।', 'Her friend came to play.'],
-      ['/images/stories/sharing/page-03.jpg', 'साथीले भालु माग्यो।', 'The friend asked for the bear.'],
-      ['/images/stories/sharing/page-04.jpg', '{name}ले भालु दिइन्।', '{name} gave the bear.'],
+      ['/images/stories/sharing/page-03.jpg', 'साथीले टेडी माग्यो।', 'The friend asked for the bear.'],
+      ['/images/stories/sharing/page-04.jpg', '{name}ले टेडी दिइन्।', '{name} gave the bear.'],
       ['/images/stories/sharing/page-05.jpg', 'साथीले भन्यो— धन्यवाद!', 'The friend said—Thank you!'],
       ['/images/stories/sharing/page-06.jpg', 'उनीहरू मिलेर ब्लक बनाए।', 'They built blocks together.'],
       ['/images/stories/sharing/page-07.jpg', 'सँगै खेल्दा झन् रमाइलो हुन्छ!', 'Playing together is more fun!'],

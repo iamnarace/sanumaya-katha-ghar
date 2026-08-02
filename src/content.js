@@ -156,59 +156,7 @@ export const storybooks = [
     ],
   },
 
-  {
-    id: 'wise-day',
-    titleNe: 'ज्ञानी {name} को दिन',
-    titleEn: "Wise {name}'s Day",
-    subtitleNe: 'बानी, प्रकृति, आकार, गन्ती र संस्कार',
-    subtitleEn: 'Habits, nature, shapes, counting and culture',
-    cover: '/images/stories/wise-day/page-01.svg',
-    fallback: '📖',
-    pages: [
-      ['/images/stories/wise-day/page-01.svg', 'यो {name} हो। आज हामी उनको रमाइलो दिन हेर्छौँ।', 'This is {name}. Let us follow her lovely day.', 'प्यारो सानो कथा', 'A lovely little story'],
-      ['/images/stories/wise-day/page-02.svg', 'बिहान भयो। {name} ले दाँत माझिन्।', 'Morning came. {name} brushed her teeth.', 'चिलिप-चिलिप!', 'Brush, brush!'],
-      ['/images/stories/wise-day/page-03.svg', 'पहेलो घाम आयो। {name} ले हात हल्लाउँदै भनिन्— नमस्ते!', 'The yellow sun came up. {name} waved and said, “Namaste!”', 'घाम लाग्यो!', 'Hello, sunshine!'],
-      ['/images/stories/wise-day/page-04.svg', 'खाजा अघि साबुन र पानीले हात धोऔँ।', 'Before snack time, let us wash our hands with soap and water.', 'छ्याप-छ्याप!', 'Splash, splash!'],
-      ['/images/stories/wise-day/page-05.svg', 'बगैँचामा सेतो बकुल्ला आयो। {name} ले नमस्ते गरिन्।', 'A white crane came to the garden. {name} said Namaste.', 'वाक-वाक!', 'Wak, wak!'],
-      ['/images/stories/wise-day/page-06.svg', '{name} ले रातो स्याउ खाइन्। स्याउ मीठो र स्वस्थ छ।', '{name} ate a red apple. Apples are sweet and healthy.', 'कुरुम-कुरुम!', 'Crunch, crunch!'],
-      ['/images/stories/wise-day/page-07.svg', 'आकाशमा षट्कोण आकारको चङ्गा उड्यो।', 'A hexagon-shaped kite flew in the sky.', 'हेर, हेर!', 'Look, look!'],
-      ['/images/stories/wise-day/page-08.svg', '{name} ले फूल गनिन्— एक, दुई, तीन!', '{name} counted the flowers—one, two, three!', '१, २, ३!', 'One, two, three!'],
-      ['/images/stories/wise-day/page-09.svg', 'बिरले शंख फुक्यो। {name} ले ठूलो आवाज सुनिन्।', 'Bir blew the conch. {name} heard its big sound.', 'फूँ... फूँ...!', 'Phoo... phoo...!'],
-      ['/images/stories/wise-day/page-10.svg', 'जून र तारा आए। शुभ रात्री, {nickname}!', 'The moon and stars came out. Good night, {nickname}!', 'शुभ रात्री!', 'Good night!'],
-    ],
-  },
-  {
-    id: 'red-flower',
-    titleNe: '{name} र रातो फूल',
-    titleEn: '{name} and the Red Flower',
-    subtitleNe: 'रङ, फूल, चरा र परिवार',
-    subtitleEn: 'Colours, flowers, birds and family',
-    cover: '/images/rose.jpg',
-    fallback: '🌹',
-    pages: [
-      ['/images/rose.jpg', 'बिहान {name} फूलबारीमा गइन्।', 'One morning, {name} went to the garden.', 'सुन्दर बिहान', 'A beautiful morning'],
-      ['/images/rose.jpg', '{name} ले ठूलो रातो फूल देखिन्।', '{name} saw a big red flower.', 'रातो फूल!', 'A red flower!'],
-      ['/images/stories/wise-day/page-05.svg', 'सानो चरा र फूलले {nickname} लाई स्वागत गरे।', 'A little bird and the flowers welcomed {nickname}.', 'चिउँ-चिउँ!', 'Chirp, chirp!'],
-      ['/images/bench.jpg', '{nickname} खुशीले हाँसिन्।', '{nickname} smiled with joy.', 'हा हा हा!', 'Ha ha ha!'],
-      ['/images/family.jpg', 'आमा र बुवाले भने— स्याबास {nickname}!', 'Mum and Dad said—well done, {nickname}!', 'स्याबास!', 'Well done!'],
-    ],
-  },
-  {
-    id: 'nepal',
-    titleNe: '{name} को नेपाल यात्रा',
-    titleEn: "{name}'s Nepal Adventure",
-    subtitleNe: 'हिमाल, नमस्ते, संस्कृति र परिवार',
-    subtitleEn: 'Mountains, Namaste, culture and family',
-    cover: '/images/traditional.jpg',
-    fallback: '🇳🇵',
-    pages: [
-      ['/images/stories/wise-day/page-01.svg', '{name} नेपालको पहाडतिर गइन्।', '{name} travelled towards the hills of Nepal.', 'नेपाल यात्रा', 'Nepal adventure'],
-      ['/images/stories/wise-day/page-03.svg', 'टाढा सेता हिमाल र पहेलो घाम देखिए।', 'Snowy mountains and a yellow sun appeared in the distance.', 'हिमाल!', 'Mountains!'],
-      ['/images/traditional.jpg', '{nickname} ले नेपाली लुगा लगाइन्।', '{nickname} wore Nepali clothes.', 'कति सुन्दर!', 'So beautiful!'],
-      ['/images/stories/wise-day/page-09.svg', 'बिरले शंख फुक्यो। सबैले नमस्ते गरे।', 'Bir blew the conch and everyone said Namaste.', 'फूँ... फूँ...!', 'Phoo... phoo...!'],
-      ['/images/family.jpg', 'परिवारसँगको यात्रा सबैभन्दा प्यारो भयो।', 'The family journey was the most special part.', 'मेरो परिवार', 'My family'],
-    ],
-  },
+
 ];
 
 export const family = [

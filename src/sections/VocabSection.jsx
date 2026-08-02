@@ -13,15 +13,15 @@ export default function VocabSection({ language, vocabularyCategories, vocabular
         <div className="flex items-center justify-between gap-4">
           <div>
             <span className="text-xs font-black uppercase tracking-wider text-emerald-500">
-              {language === 'ne' ? 'नयाँ शब्दहरू • स्पष्ट चित्र' : 'New Words • Clear Pictures'}
+              {language === 'ne' ? 'संसार बुझ्दै' : 'Discovering the World'}
             </span>
             <h2 className="mt-1 text-2xl font-black sm:text-3xl">
-              {language === 'ne' ? 'मेरो पहिलो शब्दहरू' : 'My First Words'}
+              {language === 'ne' ? 'सानुमायाका पहिलो शब्दहरू' : "Sanumaya's First Words"}
             </h2>
             <p className="text-sm font-semibold text-slate-500">
               {language === 'ne'
-                ? 'सानुमायालाई सजिलो हुने गरी तयार पारिएका शब्दहरू।'
-                : 'Basic words carefully selected for Sanumaya.'}
+                ? 'सानुमायाको वरपर भएका राम्रा कुराहरूको नाम सिकौँ!'
+                : "Let's learn to name all the wonderful things around Sanumaya!"}
             </p>
           </div>
           <span className="float-hand text-5xl drop-shadow-sm">🗣️</span>

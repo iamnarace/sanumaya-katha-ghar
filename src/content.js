@@ -410,3 +410,37 @@ export const familyMembers = [
   { id: 'maiju', ne: 'माइजु', en: 'Maiju', relNe: 'मामाकी श्रीमती', relEn: "Mama's wife", look: { hair: 'long', tika: true, shirt: '#E08A00', earrings: true } },
   { id: 'sanima', ne: 'सानीमा', en: 'Sanima', relNe: 'आमाकी बहिनी', relEn: "Mum's younger sister", look: { hair: 'pony', shirt: '#3FA7F0', earrings: true } },
 ];
+
+// ─── Big kids (3–6 years) ──────────────────────────────────
+// Barakhari: each consonant with the 12 vowel signs
+export const matras = ['', 'ा', 'ि', 'ी', 'ु', 'ू', 'े', 'ै', 'ो', 'ौ', 'ं', 'ः'];
+export const barakhariOf = (letter) => matras.map((m) => letter + m);
+
+export const weekDays = [
+  { ne: 'आइतबार', en: 'Sunday', icon: '☀️' },
+  { ne: 'सोमबार', en: 'Monday', icon: '🌙' },
+  { ne: 'मङ्गलबार', en: 'Tuesday', icon: '🔥' },
+  { ne: 'बुधबार', en: 'Wednesday', icon: '🌿' },
+  { ne: 'बिहीबार', en: 'Thursday', icon: '🌼' },
+  { ne: 'शुक्रबार', en: 'Friday', icon: '⭐' },
+  { ne: 'शनिबार', en: 'Saturday', icon: '🪐' },
+];
+
+export const nepaliMonths = ['वैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फागुन', 'चैत'];
+export const englishMonths = [
+  ['January', 'जनवरी'], ['February', 'फेब्रुअरी'], ['March', 'मार्च'], ['April', 'अप्रिल'], ['May', 'मे'], ['June', 'जुन'],
+  ['July', 'जुलाई'], ['August', 'अगस्ट'], ['September', 'सेप्टेम्बर'], ['October', 'अक्टोबर'], ['November', 'नोभेम्बर'], ['December', 'डिसेम्बर'],
+];
+
+export const opposites = [
+  [{ ne: 'ठूलो', en: 'Big', icon: '🐘' }, { ne: 'सानो', en: 'Small', icon: '🐭' }],
+  [{ ne: 'अग्लो', en: 'Tall', icon: '🦒' }, { ne: 'होचो', en: 'Short', icon: '🐧' }],
+  [{ ne: 'तातो', en: 'Hot', icon: '🔥' }, { ne: 'चिसो', en: 'Cold', icon: '🧊' }],
+  [{ ne: 'दिन', en: 'Day', icon: '☀️' }, { ne: 'रात', en: 'Night', icon: '🌙' }],
+  [{ ne: 'छिटो', en: 'Fast', icon: '🐇' }, { ne: 'ढिलो', en: 'Slow', icon: '🐢' }],
+  [{ ne: 'खुसी', en: 'Happy', icon: '😀' }, { ne: 'दुखी', en: 'Sad', icon: '😢' }],
+  [{ ne: 'माथि', en: 'Up', icon: '🎈' }, { ne: 'तल', en: 'Down', icon: '🍂' }],
+  [{ ne: 'खुला', en: 'Open', icon: '📖' }, { ne: 'बन्द', en: 'Closed', icon: '📕' }],
+  [{ ne: 'धेरै', en: 'Many', icon: '🍎🍎🍎🍎' }, { ne: 'थोरै', en: 'Few', icon: '🍎' }],
+  [{ ne: 'सफा', en: 'Clean', icon: '🛁' }, { ne: 'फोहोर', en: 'Dirty', icon: '🐷' }],
+];

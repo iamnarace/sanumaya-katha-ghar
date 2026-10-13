@@ -53,7 +53,7 @@ function NumberGrid({ items, language, onOpen }) {
   );
 }
 
-function Tables({ language }) {
+export function Tables({ language }) {
   const [table, setTable] = useState(2);
   const [hide, setHide] = useState(false);
   const [shown, setShown] = useState(() => new Set());
@@ -111,9 +111,8 @@ export default function NumbersSection({ language, numbers }) {
       <Tabs value={tab} onChange={(t) => { setTab(t); setOpen(null); }} accent={ACCENT} options={[
         ['count', language === 'ne' ? 'गन्ती १–१०' : 'Count 1–10', '🍎'],
         ['more', language === 'ne' ? '११–२०' : '11–20', '⭐'],
-        ['tables', language === 'ne' ? 'पहाडा' : 'Times tables', '✖️'],
       ]} />
-      {tab === 'tables' ? <Tables language={language} /> : <NumberGrid items={items} language={language} onOpen={setOpen} />}
+      <NumberGrid items={items} language={language} onOpen={setOpen} />
       <Viewer items={items} index={open} setIndex={setOpen} onClose={() => setOpen(null)} language={language} tint="#FFF6E2" label="Numbers" render={(item) => <CountCard key={item.n} item={item} language={language} />} />
     </div>
   );

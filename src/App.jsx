@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Settings } from 'lucide-react';
-import { bodyParts, colours, consonants, defaultProfile, english, familyMembers, numbers, shapes, storybooks, vocabulary, vocabularyCategories, vowels } from './content.js';
+import { barakhariOf, bodyParts, colours, consonants, defaultProfile, english, englishMonths, familyMembers, nepaliMonths, numbers, opposites, shapes, storybooks, vocabulary, vocabularyCategories, vowels, weekDays } from './content.js';
 import { LanguageToggle, TopBar, themes, useHashSection, useSwipe, wrap } from './ui.jsx';
 import Avatar from './Avatar.jsx';
 import LearnSection from './sections/LearnSection.jsx';
@@ -12,6 +12,7 @@ import NumbersSection from './sections/NumbersSection.jsx';
 import ColoursSection from './sections/ColoursSection.jsx';
 import BodySection from './sections/BodySection.jsx';
 import FamilySection from './sections/FamilySection.jsx';
+import AdvancedSection from './sections/AdvancedSection.jsx';
 
 const copy = {
   ne: { reward: 'स्याबास सानुमाया!', tryAgain: 'फेरि हेरौँ 🙂', previous: 'पछाडि', next: 'अर्को', page: 'पाना', restart: 'फेरि सुरु गर्ने' },
@@ -33,7 +34,7 @@ const SECTIONS = [
 const TITLES = {
   learn: ['अक्षरमाला', 'Alphabet'], numbers: ['अङ्क', 'Numbers'], colours: ['रङ र आकार', 'Colours'],
   vocab: ['शब्दहरू', 'Words'], body: ['मेरो शरीर', 'My body'], family: ['मेरो परिवार', 'My family'],
-  stories: ['कथाघर', 'Story house'], games: ['खेलौँ', "Let's play"], sanumaya: ['अभिभावकका लागि', 'For parents'],
+  stories: ['कथाघर', 'Story house'], games: ['खेलौँ', "Let's play"], advanced: ['ठूला नानीहरू', 'Big kids 3–6'], sanumaya: ['अभिभावकका लागि', 'For parents'],
 };
 
 function PrayerFlags() {
@@ -198,6 +199,14 @@ export default function App() {
               </button>
             ))}
           </nav>
+          <button type="button" onClick={() => setSection('advanced')} className="tile mt-4 flex w-full items-center gap-4 rounded-[2rem] bg-[#E7ECFF] px-5 py-4 text-left sm:mt-5" style={{ '--edge': '#B9C6FA' }}>
+            <span className="grid h-16 w-16 flex-none place-items-center rounded-2xl bg-white font-display text-3xl font-extrabold text-[#3B5BDB]">{language === 'ne' ? '२×३' : '2×3'}</span>
+            <span className="min-w-0 flex-1 leading-tight">
+              <span className="block font-display text-2xl font-extrabold text-[#3B5BDB]">{language === 'ne' ? 'ठूला नानीहरूका लागि' : 'For big kids'}</span>
+              <span className="block text-sm font-bold text-[var(--ink-soft)]">{language === 'ne' ? '३ देखि ६ वर्ष: पहाडा, जोड-घटाउ, बाह्रखरी' : 'Ages 3 to 6: times tables, sums, barakhari'}</span>
+            </span>
+            <span className="font-display text-3xl font-extrabold text-[#3B5BDB]" aria-hidden="true">›</span>
+          </button>
         </div>
         {rewardLayer}
       </div>
@@ -205,7 +214,7 @@ export default function App() {
   }
 
   const [titleNe, titleEn] = TITLES[section];
-  const accent = SECTIONS.find((s) => s.id === section)?.ink || '#6A45D8';
+  const accent = SECTIONS.find((s) => s.id === section)?.ink || (section === 'advanced' ? '#3B5BDB' : '#6A45D8');
   return (
     <div className="min-h-[100dvh] bg-[var(--bg)] pb-12">
       <TopBar {...{ titleNe, titleEn, language, setLanguage, accent }} onHome={() => setSection('home')} />
@@ -219,6 +228,7 @@ export default function App() {
         {section === 'family' && <FamilySection {...{ language, familyMembers, profile }} />}
         {section === 'games' && <GamesSection {...{ language, gameMode, setGameMode, card, phrase, choices, choose, colours, celebrate, tryAgain, newRound: () => setGameSeed((v) => v + 1) }} />}
         {section === 'stories' && <StoriesSection {...{ language, profile, storybooks, story, page, storyPage, setStoryPage, setStoryId, swipe: storySwipe, t }} />}
+        {section === 'advanced' && <AdvancedSection {...{ language, consonants, barakhariOf, weekDays, nepaliMonths, englishMonths, opposites, celebrate, tryAgain }} />}
         {section === 'sanumaya' && <PersonalSection {...{ language, profile, draftProfile, setDraftProfile, saveProfile, resetProfile }} />}
       </main>
     </div>

@@ -1,5 +1,18 @@
 # Sanumaya's Katha Ghar — Antigravity AI Handoff
 
+> **Update — 13 October 2026 (branch `feature/new-sections-refresh`)**
+>
+> Sections 6–9 below describe an older layout. Current state:
+>
+> - **Home** is a grid of 8 toy-style tiles with prayer-flag bunting: Letters, Numbers, Colours, Words, My body, Family, Stories, Games. Parents hold the gear icon for 1.5 s to open the profile page.
+> - **Navigation** uses the URL hash (`#numbers`, `#body` …) so the phone back button returns home. Language choice is remembered in `localStorage` (`sanumaya-lang`).
+> - **New sections:** `NumbersSection` (count 1–10 and 11–20 with tap-to-count, times tables 1–10 with practise mode and dot groups), `ColoursSection` (11 colours and 8 shapes), `BodySection` (tappable illustrated child plus a "find it" game), `FamilySection` (18 relations with illustrated avatars from `src/Avatar.jsx`, no real photos).
+> - **Words** has 11 categories / 142 words (new: Nature, Clothes, Vehicles; more animals, fruit and vegetables). New words use emoji until real photos are added to `public/images/vocab/`.
+> - **Shared UI** in `src/ui.jsx`: `TopBar`, `LanguageToggle`, `Tabs`, `Viewer` (full-screen swipe flashcard), `useHashSection`, `num()` for Nepali digits.
+> - **Tailwind** is now compiled at build time (`postcss.config.js`); the CDN script was removed from `index.html`.
+> - Fixed: `main` failed to build (unclosed `<div>` in `App.jsx`); missing Tihar image; story reader buttons that did nothing (download/share/listen) removed. Audio is still off.
+> - Data for all new sections lives in `src/content.js` (`numbers`, `colours`, `shapes`, `bodyParts`, `familyMembers`).
+
 **Handoff date:** 2 August 2026 (Australia/Sydney)  
 **Prepared for:** Antigravity / the next implementation agent  
 **Project owner:** Naresh Adhikari  

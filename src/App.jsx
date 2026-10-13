@@ -1,24 +1,76 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { BookOpen, Gamepad2, Home, Landmark, Settings, Shapes, Sparkles } from 'lucide-react';
-import { consonants, defaultProfile, english, family, storybooks, vowels, vocabulary, vocabularyCategories } from './content.js';
-import { themes, useSwipe, wrap } from './ui.jsx';
+import { Settings } from 'lucide-react';
+import { bodyParts, colours, consonants, defaultProfile, english, familyMembers, numbers, shapes, storybooks, vocabulary, vocabularyCategories, vowels } from './content.js';
+import { LanguageToggle, TopBar, themes, useHashSection, useSwipe, wrap } from './ui.jsx';
+import Avatar from './Avatar.jsx';
 import LearnSection from './sections/LearnSection.jsx';
 import GamesSection from './sections/GamesSection.jsx';
 import StoriesSection from './sections/StoriesSection.jsx';
 import PersonalSection from './sections/PersonalSection.jsx';
 import VocabSection from './sections/VocabSection.jsx';
+import NumbersSection from './sections/NumbersSection.jsx';
+import ColoursSection from './sections/ColoursSection.jsx';
+import BodySection from './sections/BodySection.jsx';
+import FamilySection from './sections/FamilySection.jsx';
 
 const copy = {
-  ne: { learn: 'सिकौँ', games: 'खेल', stories: 'कथा', sanumaya: 'सानुमाया', culture: 'संस्कार', vocab: 'शब्दहरू', audio: 'आवाज पछि थपिनेछ', previous: 'पछाडि', next: 'अर्को', page: 'पाना', reward: 'स्याबास सानुमाया!', tryAgain: 'फेरि प्रयास गरौँ', restart: 'फेरि सुरु गर्ने' },
-  en: { learn: 'Learn', games: 'Games', stories: 'Stories', sanumaya: 'Sanumaya', culture: 'Culture', vocab: 'Words', audio: 'Audio coming soon', previous: 'Back', next: 'Next', page: 'Page', reward: 'Well done, Sanumaya!', tryAgain: 'Try again', restart: 'Start again' },
+  ne: { reward: 'स्याबास सानुमाया!', tryAgain: 'फेरि हेरौँ 🙂', previous: 'पछाडि', next: 'अर्को', page: 'पाना', restart: 'फेरि सुरु गर्ने' },
+  en: { reward: 'Well done, Sanumaya!', tryAgain: "Let's look again 🙂", previous: 'Back', next: 'Next', page: 'Page', restart: 'Start again' },
 };
 
+// Home tiles. `edge` is the darker underside that makes each tile feel like a toy button.
+const SECTIONS = [
+  { id: 'learn', ne: 'अक्षर', en: 'Letters', bg: '#EEE8FF', edge: '#C9B8FA', ink: '#6A45D8', glyph: { ne: 'क', en: 'Aa' } },
+  { id: 'numbers', ne: 'अङ्क', en: 'Numbers', bg: '#FFF3D6', edge: '#F4CE7A', ink: '#C97800', glyph: { ne: '१२३', en: '123' } },
+  { id: 'colours', ne: 'रङ र आकार', en: 'Colours', bg: '#FFE8EC', edge: '#FFB8C6', ink: '#D93A5B', art: 'colours' },
+  { id: 'vocab', ne: 'शब्द', en: 'Words', bg: '#E1F7EA', edge: '#9EDFB9', ink: '#24875A', emoji: '🐘' },
+  { id: 'body', ne: 'मेरो शरीर', en: 'My body', bg: '#FFE9DE', edge: '#FDBE9D', ink: '#D2541E', emoji: '👃' },
+  { id: 'family', ne: 'परिवार', en: 'Family', bg: '#E2F1FD', edge: '#A9D3F5', ink: '#2F7FE0', art: 'family' },
+  { id: 'stories', ne: 'कथा', en: 'Stories', bg: '#FDE6F1', edge: '#F6B3D3', ink: '#C23A7E', emoji: '📖' },
+  { id: 'games', ne: 'खेल', en: 'Games', bg: '#DDF5F1', edge: '#97DDD3', ink: '#16877A', emoji: '🎲' },
+];
+
+const TITLES = {
+  learn: ['अक्षरमाला', 'Alphabet'], numbers: ['अङ्क', 'Numbers'], colours: ['रङ र आकार', 'Colours'],
+  vocab: ['शब्दहरू', 'Words'], body: ['मेरो शरीर', 'My body'], family: ['मेरो परिवार', 'My family'],
+  stories: ['कथाघर', 'Story house'], games: ['खेलौँ', "Let's play"], sanumaya: ['अभिभावकका लागि', 'For parents'],
+};
+
+function PrayerFlags() {
+  const colours = ['#2F7FE0', '#FFFFFF', '#E5383B', '#3BB273', '#FFD23F'];
+  const flags = Array.from({ length: 15 }, (_, i) => i);
+  return (
+    <svg viewBox="0 0 600 70" preserveAspectRatio="none" className="pointer-events-none absolute inset-x-0 top-0 h-14 w-full sm:h-16" aria-hidden="true">
+      <path d="M-10 8 Q300 46 610 8" fill="none" stroke="#B8AFD6" strokeWidth="2" />
+      {flags.map((i) => {
+        const x = 12 + i * 40;
+        const t = x / 600;
+        const y = 8 + 4 * 38 * t * (1 - t);
+        return <rect key={i} className="flag" style={{ animationDelay: `${(i % 5) * 0.25}s`, transformOrigin: `${x + 13}px ${y}px` }} x={x} y={y} width="26" height="20" rx="2" fill={colours[i % 5]} stroke="rgba(46,42,79,0.08)" />;
+      })}
+    </svg>
+  );
+}
+
+function TileArt({ s, language }) {
+  if (s.glyph) return <span className="font-display text-[4.2rem] font-extrabold leading-none sm:text-[5rem]" style={{ color: s.ink }}>{s.glyph[language]}</span>;
+  if (s.art === 'colours') return (
+    <span className="flex -space-x-3">{['#E5383B', '#FFD23F', '#2F7FE0', '#3BB273'].map((c) => <span key={c} className="h-12 w-12 rounded-full border-4 border-white sm:h-14 sm:w-14" style={{ background: c }} />)}</span>
+  );
+  if (s.art === 'family') return (
+    <span className="flex -space-x-4">
+      <span className="h-16 w-16 sm:h-20 sm:w-20"><Avatar look={{ hair: 'bun', tika: true, shirt: '#E94F6B', earrings: true }} bg="#fff" /></span>
+      <span className="h-16 w-16 sm:h-20 sm:w-20"><Avatar look={{ hair: 'short', moustache: true, shirt: '#3F8FE0' }} bg="#fff" skin={1} /></span>
+    </span>
+  );
+  return <span className="text-[4rem] leading-none sm:text-[4.8rem]">{s.emoji}</span>;
+}
+
 export default function App() {
-  const [language, setLanguage] = useState('ne');
-  const [section, setSection] = useState('home');
+  const [language, setLanguage] = useState(() => { try { return localStorage.getItem('sanumaya-lang') || 'ne'; } catch { return 'ne'; } });
+  const [section, setSection] = useHashSection();
   const [nepaliSet, setNepaliSet] = useState('consonants');
   const [index, setIndex] = useState(0);
-  const [cultureIndex, setCultureIndex] = useState(0);
   const [gameSeed, setGameSeed] = useState(0);
   const [gameMode, setGameMode] = useState('picture');
   const [reward, setReward] = useState('');
@@ -26,10 +78,7 @@ export default function App() {
   const [draftProfile, setDraftProfile] = useState(defaultProfile);
   const [storyId, setStoryId] = useState(storybooks[0].id);
   const [storyPage, setStoryPage] = useState(0);
-  const [revealed, setRevealed] = useState({});
   const rewardTimer = useRef(null);
-  
-  // Parental gate lock
   const holdTimer = useRef(null);
 
   const t = copy[language];
@@ -40,7 +89,6 @@ export default function App() {
   const story = storybooks.find((item) => item.id === storyId) || storybooks[0];
   const page = story.pages[storyPage];
   const phrase = language === 'en' ? `${card.letter} for ${card.word}` : `${card.letter} बाट ${card.word}`;
-  const countTarget = (gameSeed % 3) + 1;
 
   useEffect(() => {
     try {
@@ -50,31 +98,27 @@ export default function App() {
         setProfile(parsed);
         setDraftProfile(parsed);
       }
-    } catch {
-      // Device storage is optional.
-    }
+    } catch { /* storage is optional */ }
   }, []);
 
   useEffect(() => {
-    setIndex(0);
-    setGameSeed(0);
-  }, [language, nepaliSet]);
+    try { localStorage.setItem('sanumaya-lang', language); } catch { /* optional */ }
+    document.documentElement.lang = language;
+  }, [language]);
+
+  useEffect(() => { setIndex(0); setGameSeed(0); }, [language, nepaliSet]);
 
   useEffect(() => () => {
     if (rewardTimer.current) clearTimeout(rewardTimer.current);
     if (holdTimer.current) clearTimeout(holdTimer.current);
   }, []);
 
-  const previous = () => setIndex((value) => wrap(value - 1, cards.length));
-  const next = () => setIndex((value) => wrap(value + 1, cards.length));
+  const previous = () => setIndex((v) => wrap(v - 1, cards.length));
+  const next = () => setIndex((v) => wrap(v + 1, cards.length));
   const cardSwipe = useSwipe(previous, next);
-  const cultureSwipe = useSwipe(
-    () => setCultureIndex((value) => wrap(value - 1, culture.length)),
-    () => setCultureIndex((value) => wrap(value + 1, culture.length)),
-  );
   const storySwipe = useSwipe(
-    () => setStoryPage((value) => Math.max(0, value - 1)),
-    () => setStoryPage((value) => Math.min(story.pages.length - 1, value + 1)),
+    () => setStoryPage((v) => Math.max(0, v - 1)),
+    () => setStoryPage((v) => Math.min(story.pages.length - 1, v + 1)),
   );
 
   const choices = useMemo(() => {
@@ -85,176 +129,97 @@ export default function App() {
       if (!indexes.includes(candidate)) indexes.push(candidate);
       offset += 4;
     }
-    return indexes
-      .map((item) => cards[item])
-      .sort((a, b) => ((a.letter.codePointAt(0) + gameSeed) % 5) - ((b.letter.codePointAt(0) + gameSeed) % 5));
+    return indexes.map((i) => cards[i]).sort((a, b) => ((a.letter.codePointAt(0) + gameSeed) % 5) - ((b.letter.codePointAt(0) + gameSeed) % 5));
   }, [cardIndex, cards, gameSeed]);
 
-  const showReward = (message, duration = 900) => {
+  const showReward = (message, duration = 1000) => {
     setReward(message);
     if (rewardTimer.current) clearTimeout(rewardTimer.current);
     rewardTimer.current = setTimeout(() => setReward(''), duration);
   };
+  const celebrate = (message) => showReward(message || t.reward);
+  const tryAgain = () => showReward(t.tryAgain, 750);
 
   const choose = (choice) => {
-    if (choice.letter !== card.letter) {
-      showReward(t.tryAgain, 700);
-      return;
-    }
-    showReward(t.reward);
-    setTimeout(() => {
-      next();
-      setGameSeed((value) => value + 1);
-    }, 450);
-  };
-
-  const chooseCount = (value) => {
-    if (value !== countTarget) {
-      showReward(t.tryAgain, 700);
-      return;
-    }
-    showReward(t.reward);
-    setGameSeed((current) => current + 1);
+    if (choice.letter !== card.letter) return tryAgain();
+    celebrate();
+    setTimeout(() => { next(); setGameSeed((v) => v + 1); }, 450);
   };
 
   const saveProfile = () => {
-    const cleaned = {
-      ...draftProfile,
-      name: draftProfile.name.trim() || defaultProfile.name,
-      englishName: draftProfile.englishName.trim() || defaultProfile.englishName,
-      nickname: draftProfile.nickname.trim() || defaultProfile.nickname,
-      favouriteAnimal: draftProfile.favouriteAnimal.trim() || defaultProfile.favouriteAnimal,
-      favouriteColor: draftProfile.favouriteColor.trim() || defaultProfile.favouriteColor,
-      homePlace: draftProfile.homePlace.trim() || defaultProfile.homePlace,
-    };
+    const cleaned = Object.fromEntries(Object.entries(draftProfile).map(([k, v]) => [k, String(v).trim() || defaultProfile[k]]));
     setProfile(cleaned);
     setDraftProfile(cleaned);
-    try {
-      localStorage.setItem('sanumaya-profile', JSON.stringify(cleaned));
-    } catch {
-      // Device storage is optional.
-    }
-    showReward(language === 'ne' ? 'सानुमायाको जानकारी सुरक्षित भयो 💛' : 'Sanumaya profile saved 💛', 1100);
+    try { localStorage.setItem('sanumaya-profile', JSON.stringify(cleaned)); } catch { /* optional */ }
+    showReward(language === 'ne' ? 'सुरक्षित भयो 💛' : 'Saved 💛', 1100);
   };
-
   const resetProfile = () => {
     setProfile(defaultProfile);
     setDraftProfile(defaultProfile);
-    try {
-      localStorage.removeItem('sanumaya-profile');
-    } catch {
-      // Device storage is optional.
-    }
+    try { localStorage.removeItem('sanumaya-profile'); } catch { /* optional */ }
   };
 
-  const handleSettingsHold = () => {
-    holdTimer.current = setTimeout(() => {
-      setSection('sanumaya');
-    }, 1500); // 1.5 second hold for parental gate
-  };
+  // Parents hold the gear for 1.5s; a quick tap from a toddler does nothing.
+  const startHold = () => { holdTimer.current = setTimeout(() => setSection('sanumaya'), 1500); };
+  const cancelHold = () => { if (holdTimer.current) clearTimeout(holdTimer.current); };
 
-  const cancelSettingsHold = () => {
-    if (holdTimer.current) clearTimeout(holdTimer.current);
-  };
+  const rewardLayer = reward && (
+    <div className="reward-layer pointer-events-none fixed inset-0 z-[100] grid place-items-center p-4">
+      <div className="rounded-[2rem] bg-white px-7 py-5 text-center font-display text-3xl font-extrabold text-[var(--ink)] shadow-[0_10px_0_rgba(46,42,79,0.12),0_20px_50px_rgba(46,42,79,0.2)]">🌟 {reward}</div>
+    </div>
+  );
 
-  if (section === 'home') {
+  if (section === 'home' || !TITLES[section]) {
     return (
-      <div className="relative w-full min-h-[100dvh] bg-gradient-to-b from-[#8fd3f4] to-[#84fab0] flex flex-col items-center justify-center overflow-hidden p-4 select-none">
-        {/* Animated Background Clouds */}
-        <div className="absolute top-10 left-10 w-32 h-10 bg-white/40 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-48 h-16 bg-white/30 rounded-full blur-2xl float-hand"></div>
-        <div className="absolute top-40 right-20 w-24 h-8 bg-white/50 rounded-full blur-lg animate-pulse" style={{ animationDelay: '1s' }}></div>
-        
-        {/* Personalized Stickers */}
-        <img src="/images/stickers/waving.png" className="absolute top-32 left-4 sm:left-12 w-24 sm:w-32 opacity-80 mix-blend-multiply -rotate-12 float-hand z-10" alt="" />
-        <img src="/images/stickers/laughing.png" className="absolute top-24 right-4 sm:right-16 w-24 sm:w-32 opacity-80 mix-blend-multiply rotate-12 float-hand z-10" style={{ animationDelay: '1s' }} alt="" />
-        <img src="/images/stickers/pointing.png" className="absolute bottom-16 left-4 sm:left-12 w-24 sm:w-32 opacity-80 mix-blend-multiply rotate-6 float-hand z-10" style={{ animationDelay: '2s' }} alt="" />
-        <img src="/images/stickers/namaste.png" className="absolute bottom-20 right-4 sm:right-12 w-24 sm:w-32 opacity-80 mix-blend-multiply -rotate-6 float-hand z-10" style={{ animationDelay: '0.5s' }} alt="" />
-
-        {/* Parental Gate & Controls */}
-        <button 
-          onPointerDown={handleSettingsHold}
-          onPointerUp={cancelSettingsHold}
-          onPointerLeave={cancelSettingsHold}
-          className="absolute top-6 right-6 z-40 p-3 sm:p-4 bg-white/20 hover:bg-white/40 active:bg-white/60 backdrop-blur-md rounded-full text-white shadow-lg transition-all"
-          title="Hold for 1.5s to open Settings"
-        >
-          <Settings size={28} />
-        </button>
-
-        <button 
-          onClick={() => setLanguage(language === 'ne' ? 'en' : 'ne')} 
-          className="absolute top-6 left-6 z-40 px-5 py-3 sm:px-6 sm:py-4 bg-white/20 hover:bg-white/40 active:scale-95 backdrop-blur-md rounded-full text-white font-black text-lg sm:text-xl shadow-lg transition-all"
-        >
-          {language === 'ne' ? 'EN' : 'ने'}
-        </button>
-        
-        {/* Main Content Wrapper (Centers title and grid together) */}
-        <div className="relative z-20 flex flex-col items-center justify-center w-full max-w-2xl gap-6 sm:gap-10 mt-12 sm:mt-0">
-          
-          {/* Title Area */}
-          <div className="text-center w-full px-2">
-            <h1 className="text-[2.5rem] sm:text-6xl md:text-7xl font-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.1)] tracking-wide leading-tight">
-              {language === 'ne' ? 'सानुमायाको कथाघर' : "Sanumaya's World"}
-            </h1>
-            <p className="mt-2 text-white/90 font-bold text-sm sm:text-lg drop-shadow-sm">
-              {language === 'ne' ? 'रमाइलो संसारमा स्वागत छ!' : 'Welcome to the fun learning world!'}
-            </p>
+      <div className="relative min-h-[100dvh] overflow-x-hidden bg-[radial-gradient(120%_60%_at_50%_0%,#DCEBFF_0%,#F6F3FF_60%)] pb-10">
+        <PrayerFlags />
+        <div className="relative mx-auto max-w-5xl px-4" style={{ paddingTop: 'calc(env(safe-area-inset-top) + 4.25rem)' }}>
+          <div className="flex items-center justify-between">
+            <button type="button" onPointerDown={startHold} onPointerUp={cancelHold} onPointerLeave={cancelHold} onContextMenu={(e) => e.preventDefault()} aria-label={language === 'ne' ? 'अभिभावक: १.५ सेकेन्ड थिच्नुहोस्' : 'Parents: press and hold'} title="Hold for 1.5 seconds" className="grid h-11 w-11 place-items-center rounded-full bg-white/70 text-[var(--ink-soft)]">
+              <Settings size={22} />
+            </button>
+            <LanguageToggle language={language} setLanguage={setLanguage} />
           </div>
-
-          {/* The 4 Giant Portals */}
-          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-10 w-full z-10">
-          <button onClick={() => setSection('learn')} className="group relative aspect-square bg-gradient-to-br from-[#ff9a9e] to-[#fecfef] rounded-[2.5rem] sm:rounded-[4rem] border-[6px] border-white/70 shadow-[0_20px_50px_rgba(255,154,158,0.5)] transform transition-transform hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 sm:gap-4 float-hand" style={{ animationDelay: '0s' }}>
-            <span className="text-[5.5rem] sm:text-[6rem] md:text-[7.5rem] font-black text-white drop-shadow-md leading-none pt-4 tracking-tighter">
-              {language === 'ne' ? 'क' : 'ABC'}
-            </span>
-            <span className="text-xl sm:text-3xl font-black text-white/95">{t.learn}</span>
-          </button>
-
-          <button onClick={() => setSection('stories')} className="group relative aspect-square bg-gradient-to-br from-[#a18cd1] to-[#fbc2eb] rounded-[2.5rem] sm:rounded-[4rem] border-[6px] border-white/70 shadow-[0_20px_50px_rgba(161,140,209,0.5)] transform transition-transform hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 sm:gap-4 float-hand" style={{ animationDelay: '0.2s' }}>
-            <BookOpen className="w-16 h-16 sm:w-28 sm:h-28 text-white drop-shadow-md" strokeWidth={2.5} />
-            <span className="text-xl sm:text-3xl font-black text-white/95 mt-2">{t.stories}</span>
-          </button>
-
-          <button onClick={() => setSection('games')} className="group relative aspect-square bg-gradient-to-br from-[#f6d365] to-[#fda085] rounded-[2.5rem] sm:rounded-[4rem] border-[6px] border-white/70 shadow-[0_20px_50px_rgba(246,211,101,0.5)] transform transition-transform hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 sm:gap-4 float-hand" style={{ animationDelay: '0.4s' }}>
-            <Gamepad2 className="w-16 h-16 sm:w-28 sm:h-28 text-white drop-shadow-md" strokeWidth={2.5} />
-            <span className="text-xl sm:text-3xl font-black text-white/95 mt-2">{t.games}</span>
-          </button>
-
-          <button onClick={() => setSection('vocab')} className="group relative aspect-square bg-gradient-to-br from-[#4facfe] to-[#00f2fe] rounded-[2.5rem] sm:rounded-[4rem] border-[6px] border-white/70 shadow-[0_20px_50px_rgba(79,172,254,0.5)] transform transition-transform hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 sm:gap-4 float-hand" style={{ animationDelay: '0.6s' }}>
-            <Landmark className="w-16 h-16 sm:w-28 sm:h-28 text-white drop-shadow-md" strokeWidth={2.5} />
-            <span className="text-xl sm:text-3xl font-black text-white/95 mt-2">{t.vocab}</span>
-          </button>
+          <div className="mt-4 flex items-center gap-3 sm:mt-6">
+            <img src="/images/stickers/namaste.png" alt="" className="h-24 w-24 flex-none object-contain mix-blend-multiply sm:h-32 sm:w-32" />
+            <div className="min-w-0">
+              <p className="text-xl font-bold text-[var(--ink-soft)] sm:text-2xl">{language === 'ne' ? `नमस्ते, ${profile.nickname}!` : `Namaste, ${profile.englishName}!`}</p>
+              <h1 className="font-display text-[2.6rem] font-extrabold leading-[1.05] text-[var(--ink)] sm:text-6xl">{language === 'ne' ? `${profile.name}को कथाघर` : `${profile.englishName}'s Story House`}</h1>
+            </div>
+          </div>
+          <nav className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4" aria-label={language === 'ne' ? 'खण्डहरू' : 'Sections'}>
+            {SECTIONS.map((s) => (
+              <button key={s.id} type="button" onClick={() => setSection(s.id)} className="tile flex aspect-[1/1.02] flex-col items-center justify-center gap-2 rounded-[2rem] px-2" style={{ background: s.bg, '--edge': s.edge }}>
+                <span className="grid h-24 place-items-center sm:h-28"><TileArt s={s} language={language} /></span>
+                <span className="text-center leading-tight">
+                  <span className="block font-display text-[1.6rem] font-extrabold sm:text-3xl" style={{ color: s.ink }}>{language === 'ne' ? s.ne : s.en}</span>
+                  <span className="block text-sm font-bold text-[var(--ink-soft)]">{language === 'ne' ? s.en : s.ne}</span>
+                </span>
+              </button>
+            ))}
+          </nav>
         </div>
+        {rewardLayer}
       </div>
     );
   }
 
-  // Active Section View
+  const [titleNe, titleEn] = TITLES[section];
+  const accent = SECTIONS.find((s) => s.id === section)?.ink || '#6A45D8';
   return (
-    <div className="min-h-[100dvh] select-none bg-[#fbfaf7] pb-10 text-slate-700 relative">
-      {/* Floating Home Button */}
-      <button 
-        onClick={() => setSection('home')} 
-        className="fixed top-4 left-4 sm:top-6 sm:left-6 z-50 p-3 sm:p-4 bg-white border-[3.5px] border-slate-100 rounded-[1.2rem] shadow-xl hover:scale-105 active:scale-95 transition-transform text-slate-400 hover:text-violet-500"
-      >
-        <Home size={26} strokeWidth={3} />
-      </button>
-
-      {reward && (
-        <div className="reward-layer pointer-events-none fixed inset-0 z-[100] grid place-items-center bg-slate-900/10 p-4">
-          <div className="rounded-3xl border border-white bg-white/95 px-6 py-5 text-center text-2xl font-black shadow-2xl">
-            🌟 {reward}
-          </div>
-        </div>
-      )}
-
-      <main className="mx-auto grid w-full max-w-5xl gap-4 px-3 pt-24 sm:pt-32 pb-4 sm:px-5">
-        {section === 'learn' && <LearnSection {...{ language, nepaliSet, setNepaliSet, cards, cardIndex, setIndex, card, theme, phrase, previous, next, swipe: cardSwipe, t }} />}
-        {section === 'vocab' && <VocabSection {...{ language, vocabularyCategories, vocabulary, t }} />}
-        {section === 'games' && <GamesSection {...{ language, gameMode, setGameMode, card, phrase, choices, choose, countTarget, chooseCount, previous, next, newRound: () => setGameSeed((value) => value + 1), t }} />}
+    <div className="min-h-[100dvh] bg-[var(--bg)] pb-12">
+      <TopBar {...{ titleNe, titleEn, language, setLanguage, accent }} onHome={() => setSection('home')} />
+      {rewardLayer}
+      <main className="mx-auto w-full max-w-5xl px-4 pt-4">
+        {section === 'learn' && <LearnSection {...{ language, nepaliSet, setNepaliSet, cards, cardIndex, setIndex, card, theme, phrase, previous, next, swipe: cardSwipe }} />}
+        {section === 'numbers' && <NumbersSection {...{ language, numbers }} />}
+        {section === 'colours' && <ColoursSection {...{ language, colours, shapes }} />}
+        {section === 'vocab' && <VocabSection {...{ language, vocabularyCategories, vocabulary }} />}
+        {section === 'body' && <BodySection {...{ language, bodyParts, celebrate, tryAgain }} />}
+        {section === 'family' && <FamilySection {...{ language, familyMembers, profile }} />}
+        {section === 'games' && <GamesSection {...{ language, gameMode, setGameMode, card, phrase, choices, choose, colours, celebrate, tryAgain, newRound: () => setGameSeed((v) => v + 1) }} />}
         {section === 'stories' && <StoriesSection {...{ language, profile, storybooks, story, page, storyPage, setStoryPage, setStoryId, swipe: storySwipe, t }} />}
-        {section === 'sanumaya' && <PersonalSection {...{ language, profile, draftProfile, setDraftProfile, saveProfile, resetProfile, family, revealed, setRevealed }} />}
+        {section === 'sanumaya' && <PersonalSection {...{ language, profile, draftProfile, setDraftProfile, saveProfile, resetProfile }} />}
       </main>
     </div>
   );

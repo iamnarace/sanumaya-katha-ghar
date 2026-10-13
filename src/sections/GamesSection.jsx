@@ -1,12 +1,89 @@
-import { ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react';
-import { SafeImage } from '../ui.jsx';
+import { useMemo, useState } from 'react';
+import { RefreshCw } from 'lucide-react';
+import { SafeImage, Tabs, num } from '../ui.jsx';
 
-export default function GamesSection({ language, gameMode, setGameMode, card, phrase, choices, choose, countTarget, chooseCount, previous, next, newRound, t }) {
-  return <>
-    <section className="rounded-3xl border border-slate-100 bg-white p-4 shadow-sm sm:p-5"><span className="text-xs font-black uppercase text-emerald-600">{language === 'ne' ? 'सानुमायाका आफ्नै खेल' : "Sanumaya's own games"}</span><h2 className="mt-1 text-2xl font-black sm:text-3xl">{language === 'ne' ? 'छोऊ, चिन र खेल' : 'Tap, recognise and play'}</h2><div className="mt-4 grid grid-cols-3 gap-2">{[['picture', '🖼️', language === 'ne' ? 'चित्र छान' : 'Pick picture'], ['letter', 'अ', language === 'ne' ? 'अक्षर छान' : 'Pick letter'], ['count', '१', language === 'ne' ? 'गन्ती गर' : 'Count']].map(([id, icon, label]) => <button type="button" key={id} onClick={() => setGameMode(id)} className={`min-h-24 rounded-2xl border p-2 font-black shadow-sm ${gameMode === id ? 'border-emerald-200 bg-emerald-50 text-emerald-800' : 'border-slate-100 bg-[#fbfaf7]'}`}><span className="block text-4xl">{icon}</span><span className="mt-1 block text-sm">{label}</span></button>)}</div></section>
-    {gameMode === 'picture' && <section className="rounded-3xl border border-slate-100 bg-white p-4 shadow-sm sm:p-5"><h3 className="text-2xl font-black">{language === 'ne' ? `${phrase} कहाँ छ?` : `Where is ${card.word}?`}</h3><div className="mt-5 grid grid-cols-3 gap-2 sm:gap-4">{choices.map((choice) => <button type="button" key={choice.letter} onClick={() => choose(choice)} className="flex min-h-48 flex-col items-center justify-center rounded-3xl border-2 border-slate-100 bg-[#fbfaf7] p-2 shadow-sm active:scale-95"><span className="grid h-32 w-full place-items-center overflow-hidden rounded-2xl bg-white"><SafeImage src={choice.image} alt={choice.word} fallback={choice.fallback} className="h-full w-full" contain /></span><strong className="mt-3 text-base leading-tight sm:text-lg">{choice.word}</strong></button>)}</div></section>}
-    {gameMode === 'letter' && <section className="rounded-3xl border border-slate-100 bg-white p-4 shadow-sm sm:p-5"><h3 className="text-2xl font-black">{language === 'ne' ? `${card.word} कुन अक्षरबाट सुरु हुन्छ?` : `Which letter starts ${card.word}?`}</h3><div className="mx-auto mt-4 grid h-64 max-w-md place-items-center overflow-hidden rounded-3xl bg-slate-50"><SafeImage src={card.image} alt={card.word} fallback={card.fallback} className="h-full w-full" contain /></div><div className="mt-4 grid grid-cols-3 gap-3">{choices.map((choice) => <button type="button" key={choice.letter} onClick={() => choose(choice)} className="min-h-28 rounded-3xl border border-violet-100 bg-violet-50 text-5xl font-black text-violet-800 active:scale-95">{choice.letter}</button>)}</div></section>}
-    {gameMode === 'count' && <section className="rounded-3xl border border-slate-100 bg-white p-4 text-center shadow-sm sm:p-5"><h3 className="text-2xl font-black">{language === 'ne' ? 'कति वटा फूल छन्?' : 'How many flowers are there?'}</h3><div className="my-8 flex min-h-40 items-center justify-center gap-3 text-7xl sm:text-8xl">{Array.from({ length: countTarget }, (_, item) => <span key={item}>🌼</span>)}</div><div className="grid grid-cols-3 gap-3">{[1, 2, 3].map((value) => <button type="button" key={value} onClick={() => chooseCount(value)} className="min-h-24 rounded-3xl bg-amber-50 text-5xl font-black text-amber-800 shadow-sm active:scale-95">{language === 'ne' ? ['१', '२', '३'][value - 1] : value}</button>)}</div></section>}
-    <div className="flex justify-between gap-3"><button type="button" onClick={previous} className="inline-flex min-h-12 items-center gap-2 rounded-2xl bg-violet-50 px-4 font-black text-violet-700"><ChevronLeft />{t.previous}</button><button type="button" onClick={newRound} className="inline-flex min-h-12 items-center gap-2 rounded-2xl bg-sky-50 px-4 font-black text-sky-700"><RefreshCw size={20} />{language === 'ne' ? 'नयाँ खेल' : 'New round'}</button><button type="button" onClick={next} className="inline-flex min-h-12 items-center gap-2 rounded-2xl bg-violet-50 px-4 font-black text-violet-700">{t.next}<ChevronRight /></button></div>
-  </>;
+const COUNT_THINGS = ['🌼', '🐥', '🍎', '🎈', '⭐', '🐟', '🦋', '🍓'];
+
+function ColourGame({ language, colours, celebrate, tryAgain }) {
+  const [round, setRound] = useState(0);
+  const { target, options } = useMemo(() => {
+    const t = colours[(round * 5) % colours.length];
+    const others = colours.filter((c) => c.id !== t.id);
+    const picks = [t, others[(round * 3) % others.length], others[(round * 3 + 4) % others.length]];
+    return { target: t, options: picks.sort((a, b) => ((a.hex.charCodeAt(2) + round) % 7) - ((b.hex.charCodeAt(2) + round) % 7)) };
+  }, [round, colours]);
+  const choose = (c) => {
+    if (c.id !== target.id) return tryAgain();
+    celebrate(language === 'ne' ? `${target.ne}! स्याबास!` : `${target.en}! Well done!`);
+    setTimeout(() => setRound((r) => r + 1), 700);
+  };
+  return (
+    <section className="rounded-[2rem] bg-white p-5 text-center shadow-[0_6px_0_rgba(46,42,79,0.08)]">
+      <h2 className="font-display text-3xl font-extrabold text-[var(--ink)]">{language === 'ne' ? `${target.ne} कुन हो?` : `Which one is ${target.en.toLowerCase()}?`}</h2>
+      <div className="mt-6 grid grid-cols-3 gap-3">
+        {options.map((c) => (
+          <button key={c.id} type="button" onClick={() => choose(c)} aria-label={c.en} className="aspect-square rounded-[1.8rem] shadow-[0_6px_0_rgba(0,0,0,0.15)] active:translate-y-1 active:shadow-none" style={{ background: c.hex, border: c.id === 'white' ? '3px solid #E4E0F0' : 'none' }} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function CountGame({ language, celebrate, tryAgain }) {
+  const [round, setRound] = useState(0);
+  const target = ((round * 3) % 5) + 1;
+  const thing = COUNT_THINGS[round % COUNT_THINGS.length];
+  const choose = (v) => {
+    if (v !== target) return tryAgain();
+    celebrate(language === 'ne' ? `${num(target, 'ne')}! स्याबास!` : `${target}! Well done!`);
+    setTimeout(() => setRound((r) => r + 1), 700);
+  };
+  return (
+    <section className="rounded-[2rem] bg-white p-5 text-center shadow-[0_6px_0_rgba(46,42,79,0.08)]">
+      <h2 className="font-display text-3xl font-extrabold text-[var(--ink)]">{language === 'ne' ? 'कति वटा छन्?' : 'How many?'}</h2>
+      <div className="my-6 flex min-h-32 flex-wrap items-center justify-center gap-2 text-6xl sm:text-7xl">{Array.from({ length: target }, (_, i) => <span key={i}>{thing}</span>)}</div>
+      <div className="grid grid-cols-5 gap-2">
+        {[1, 2, 3, 4, 5].map((v) => <button key={v} type="button" onClick={() => choose(v)} className="h-20 rounded-[1.4rem] bg-[#FFF3D6] font-display text-5xl font-extrabold text-[#C97800] shadow-[0_5px_0_#F4CE7A] active:translate-y-1 active:shadow-none">{num(v, language)}</button>)}
+      </div>
+    </section>
+  );
+}
+
+export default function GamesSection({ language, gameMode, setGameMode, card, phrase, choices, choose, newRound, colours, celebrate, tryAgain }) {
+  return (
+    <div className="flex flex-col gap-4">
+      <Tabs value={gameMode} onChange={setGameMode} accent="#16877A" options={[
+        ['picture', language === 'ne' ? 'चित्र छान' : 'Pick the picture', '🖼️'],
+        ['letter', language === 'ne' ? 'अक्षर छान' : 'Pick the letter', 'अ'],
+        ['count', language === 'ne' ? 'गन्ती' : 'Count', '🔢'],
+        ['colour', language === 'ne' ? 'रङ छान' : 'Pick the colour', '🎨'],
+      ]} />
+      {gameMode === 'picture' && (
+        <section className="rounded-[2rem] bg-white p-5 shadow-[0_6px_0_rgba(46,42,79,0.08)]">
+          <h2 className="text-center font-display text-3xl font-extrabold text-[var(--ink)]">{language === 'ne' ? `${card.word} कहाँ छ?` : `Where is the ${card.word.toLowerCase()}?`}</h2>
+          <div className="mt-5 grid grid-cols-3 gap-2 sm:gap-4">
+            {choices.map((c) => (
+              <button type="button" key={c.letter} onClick={() => choose(c)} aria-label={c.word} className="tile flex flex-col items-center rounded-[1.6rem] bg-[#F6F3FF] p-2" style={{ '--edge': 'rgba(46,42,79,0.1)' }}>
+                <span className="grid h-28 w-full place-items-center overflow-hidden rounded-2xl bg-white sm:h-36"><SafeImage src={c.image} alt={c.word} fallback={c.fallback} className="h-full w-full [--emoji:4rem]" contain /></span>
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+      {gameMode === 'letter' && (
+        <section className="rounded-[2rem] bg-white p-5 shadow-[0_6px_0_rgba(46,42,79,0.08)]">
+          <h2 className="text-center font-display text-3xl font-extrabold text-[var(--ink)]">{language === 'ne' ? `${card.word} कुन अक्षरबाट?` : `${card.word} starts with…`}</h2>
+          <div className="mx-auto mt-4 grid h-56 max-w-sm place-items-center overflow-hidden rounded-[1.8rem] bg-[#F6F3FF]"><SafeImage src={card.image} alt={card.word} fallback={card.fallback} className="h-full w-full [--emoji:7rem]" contain /></div>
+          <div className="mt-4 grid grid-cols-3 gap-3">
+            {choices.map((c) => <button type="button" key={c.letter} onClick={() => choose(c)} className="h-24 rounded-[1.6rem] bg-[#EEE8FF] font-display text-6xl font-extrabold text-[#6A45D8] shadow-[0_5px_0_#C9B8FA] active:translate-y-1 active:shadow-none">{c.letter}</button>)}
+          </div>
+        </section>
+      )}
+      {gameMode === 'count' && <CountGame {...{ language, celebrate, tryAgain }} />}
+      {gameMode === 'colour' && <ColourGame {...{ language, colours, celebrate, tryAgain }} />}
+      {(gameMode === 'picture' || gameMode === 'letter') && (
+        <button type="button" onClick={newRound} className="mx-auto flex h-12 items-center gap-2 rounded-full bg-white px-5 font-extrabold text-[var(--ink-soft)] shadow-[0_3px_0_rgba(46,42,79,0.1)]"><RefreshCw size={20} />{language === 'ne' ? 'अर्को पालो' : 'New round'}</button>
+      )}
+    </div>
+  );
 }

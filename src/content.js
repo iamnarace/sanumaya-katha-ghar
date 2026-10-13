@@ -211,14 +211,17 @@ export const defaultProfile = {
 
 
 export const vocabularyCategories = [
-  { id: 'animals', nameNe: 'जनावरहरू', nameEn: 'Animals', color: '#ff9a9e', toColor: '#fecfef' },
-  { id: 'food', nameNe: 'खाना र फलफूल', nameEn: 'Food & Fruits', color: '#f6d365', toColor: '#fda085' },
-  { id: 'vegetables', nameNe: 'तरकारीहरू', nameEn: 'Vegetables', color: '#84fab0', toColor: '#8fd3f4' },
-  { id: 'body', nameNe: 'शरीरका अंगहरू', nameEn: 'Body Parts', color: '#a18cd1', toColor: '#fbc2eb' },
-  { id: 'home', nameNe: 'मेरो घर', nameEn: 'My Home', color: '#5ee7df', toColor: '#b490ca' },
-  { id: 'kitchen', nameNe: 'भान्सा', nameEn: 'Kitchen', color: '#ff758c', toColor: '#ff7eb3' },
-  { id: 'actions', nameNe: 'काम बुझाउने', nameEn: 'Action Words', color: '#8fd3f4', toColor: '#84fab0' },
-  { id: 'culture', nameNe: 'संस्कार', nameEn: 'Culture', color: '#5ee7df', toColor: '#b490ca' },
+  { id: 'animals', nameNe: 'जनावर', nameEn: 'Animals', icon: '🐘', color: '#E94F6B', tint: '#FFE8EC' },
+  { id: 'food', nameNe: 'खाना र फलफूल', nameEn: 'Food & Fruit', icon: '🍎', color: '#E08A00', tint: '#FFF1D6' },
+  { id: 'vegetables', nameNe: 'तरकारी', nameEn: 'Vegetables', icon: '🥕', color: '#2FA36B', tint: '#E1F7EA' },
+  { id: 'nature', nameNe: 'प्रकृति', nameEn: 'Nature', icon: '🌳', color: '#1E9E8F', tint: '#DDF5F1' },
+  { id: 'clothes', nameNe: 'लुगा', nameEn: 'Clothes', icon: '👕', color: '#3F8FE0', tint: '#E2EFFD' },
+  { id: 'vehicles', nameNe: 'सवारी', nameEn: 'Vehicles', icon: '🚌', color: '#E2662F', tint: '#FFE9DE' },
+  { id: 'home', nameNe: 'मेरो घर', nameEn: 'My Home', icon: '🏠', color: '#7A5CE0', tint: '#EEE8FF' },
+  { id: 'kitchen', nameNe: 'भान्सा', nameEn: 'Kitchen', icon: '🥣', color: '#D9488F', tint: '#FDE6F1' },
+  { id: 'actions', nameNe: 'के गर्दै?', nameEn: 'Actions', icon: '🏃', color: '#2C93B8', tint: '#DFF3FA' },
+  { id: 'body', nameNe: 'शरीर (फोटो)', nameEn: 'Body photos', icon: '👀', color: '#B4572E', tint: '#F9E8DF' },
+  { id: 'culture', nameNe: 'संस्कार', nameEn: 'Culture', icon: '🪔', color: '#C2410C', tint: '#FFEDD5' },
 ];
 
 export const vocabulary = [
@@ -308,5 +311,102 @@ export const vocabulary = [
   { id: 'v_c7', category: 'culture', ne: 'दियो', en: 'Diyo', image: '/images/vocab/Diyo.jpeg', fallback: '🪔' },
   { id: 'v_c8', category: 'culture', ne: 'मन्दिर', en: 'Temple', image: '/images/vocab/Temple.jpeg', fallback: '⛩️' },
   { id: 'v_c9', category: 'culture', ne: 'दशैं', en: 'Dashain', image: '/images/vocab/Dashain.jpeg', fallback: '🌾' },
-  { id: 'v_c10', category: 'culture', ne: 'तिहार', en: 'Tihar', image: '/images/vocab/Tihar.jpeg', fallback: '💡' },
+  { id: 'v_c10', category: 'culture', ne: 'तिहार', en: 'Tihar', image: '', fallback: '🪔' },
+  ...[
+    ['animals', 'कुखुरा', 'Hen', '🐔'], ['animals', 'हाँस', 'Duck', '🦆'], ['animals', 'भेडा', 'Sheep', '🐑'],
+    ['animals', 'मुसा', 'Mouse', '🐭'], ['animals', 'भ्यागुतो', 'Frog', '🐸'], ['animals', 'पुतली', 'Butterfly', '🦋'],
+    ['animals', 'मयूर', 'Peacock', '🦚'], ['animals', 'कछुवा', 'Tortoise', '🐢'], ['animals', 'जिराफ', 'Giraffe', '🦒'],
+    ['food', 'अंगुर', 'Grapes', '🍇'], ['food', 'तरबुजा', 'Watermelon', '🍉'], ['food', 'भुइँकटहर', 'Pineapple', '🍍'],
+    ['food', 'नासपाती', 'Pear', '🍐'], ['food', 'कागती', 'Lemon', '🍋'], ['food', 'रोटी', 'Roti', '🫓'],
+    ['food', 'मःम', 'Momo', '🥟'], ['food', 'दही', 'Yoghurt', '🥣'],
+    ['vegetables', 'बन्दा', 'Cabbage', '🥬'], ['vegetables', 'भन्टा', 'Eggplant', '🍆'], ['vegetables', 'खुर्सानी', 'Chilli', '🌶️'],
+    ['vegetables', 'मकै', 'Corn', '🌽'], ['vegetables', 'काँक्रो', 'Cucumber', '🥒'], ['vegetables', 'ब्रोकाउली', 'Broccoli', '🥦'],
+    ['vegetables', 'च्याउ', 'Mushroom', '🍄'], ['vegetables', 'लसुन', 'Garlic', '🧄'], ['vegetables', 'अदुवा', 'Ginger', '🫚'],
+    ['vegetables', 'केराउ', 'Peas', '🫛'], ['vegetables', 'भेडे खुर्सानी', 'Capsicum', '🫑'], ['vegetables', 'सखरखण्ड', 'Sweet potato', '🍠'],
+    ['nature', 'घाम', 'Sun', '☀️'], ['nature', 'जून', 'Moon', '🌙'], ['nature', 'तारा', 'Star', '⭐'],
+    ['nature', 'बादल', 'Cloud', '☁️'], ['nature', 'पानी पर्‍यो', 'Rain', '🌧️'], ['nature', 'इन्द्रेणी', 'Rainbow', '🌈'],
+    ['nature', 'रूख', 'Tree', '🌳'], ['nature', 'फूल', 'Flower', '🌸'], ['nature', 'हिमाल', 'Mountain', '🏔️'],
+    ['nature', 'हिउँ', 'Snow', '❄️'], ['nature', 'पात', 'Leaf', '🍃'], ['nature', 'समुद्र', 'Sea', '🌊'],
+    ['clothes', 'कमिज', 'Shirt', '👕'], ['clothes', 'पाइन्ट', 'Trousers', '👖'], ['clothes', 'फ्रक', 'Dress', '👗'],
+    ['clothes', 'जुत्ता', 'Shoes', '👟'], ['clothes', 'मोजा', 'Socks', '🧦'], ['clothes', 'टोपी', 'Hat', '👒'],
+    ['clothes', 'ज्याकेट', 'Jacket', '🧥'], ['clothes', 'पन्जा', 'Gloves', '🧤'], ['clothes', 'चस्मा', 'Glasses', '👓'],
+    ['vehicles', 'कार', 'Car', '🚗'], ['vehicles', 'बस', 'Bus', '🚌'], ['vehicles', 'साइकल', 'Bicycle', '🚲'],
+    ['vehicles', 'हवाइजहाज', 'Aeroplane', '✈️'], ['vehicles', 'रेल', 'Train', '🚆'], ['vehicles', 'डुंगा', 'Boat', '⛵'],
+    ['vehicles', 'मोटरसाइकल', 'Motorbike', '🏍️'], ['vehicles', 'हेलिकप्टर', 'Helicopter', '🚁'], ['vehicles', 'ट्याक्टर', 'Tractor', '🚜'],
+    ['vehicles', 'दमकल', 'Fire truck', '🚒'],
+    ['home', 'बत्ती', 'Lamp', '💡'], ['home', 'घडी', 'Clock', '🕰️'], ['home', 'किताब', 'Book', '📖'],
+    ['home', 'खेलौना भालु', 'Teddy', '🧸'], ['home', 'बल', 'Ball', '⚽'],
+  ].map(([category, ne, en, fallback], i) => ({ id: `x${i}`, category, ne, en, image: '', fallback })),
+];
+
+// ─── Numbers ───────────────────────────────────────────────
+const neDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+export const toNepaliDigits = (value) => String(value).replace(/\d/g, (d) => neDigits[d]);
+
+const numberWordsNe = ['', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ', 'दस', 'एघार', 'बाह्र', 'तेह्र', 'चौध', 'पन्ध्र', 'सोह्र', 'सत्र', 'अठार', 'उन्नाइस', 'बीस'];
+const numberWordsEn = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty'];
+const countObjects = ['🍎', '🐥', '🌼', '🎈', '⭐', '🐟', '🍌', '🦋', '🍓', '🪔', '🫐', '🐞', '🌸', '🍪', '🐠', '🌟', '🍊', '🐝', '🍒', '🎀'];
+
+export const numbers = Array.from({ length: 20 }, (_, i) => ({ n: i + 1, ne: numberWordsNe[i + 1], en: numberWordsEn[i + 1], object: countObjects[i] }));
+
+// ─── Colours and shapes ────────────────────────────────────
+export const colours = [
+  { id: 'red', ne: 'रातो', en: 'Red', hex: '#E5383B', ink: '#fff', things: ['🍎', '🍓', '🌹'] },
+  { id: 'blue', ne: 'निलो', en: 'Blue', hex: '#2F7FE0', ink: '#fff', things: ['🫐', '🐳', '🦋'] },
+  { id: 'yellow', ne: 'पहेँलो', en: 'Yellow', hex: '#FFD23F', ink: '#5B4300', things: ['🍌', '🌻', '🐥'] },
+  { id: 'green', ne: 'हरियो', en: 'Green', hex: '#3BB273', ink: '#fff', things: ['🥦', '🐸', '🍃'] },
+  { id: 'orange', ne: 'सुन्तले', en: 'Orange', hex: '#FF8C32', ink: '#fff', things: ['🍊', '🥕', '🦊'] },
+  { id: 'pink', ne: 'गुलाबी', en: 'Pink', hex: '#F47FB5', ink: '#fff', things: ['🌸', '🐷', '🎀'] },
+  { id: 'purple', ne: 'बैजनी', en: 'Purple', hex: '#8E5BD8', ink: '#fff', things: ['🍇', '🍆', '☂️'] },
+  { id: 'brown', ne: 'खैरो', en: 'Brown', hex: '#8B5A3C', ink: '#fff', things: ['🐻', '🥔', '🍫'] },
+  { id: 'white', ne: 'सेतो', en: 'White', hex: '#FFFFFF', ink: '#3A3560', things: ['🥛', '☁️', '🐑'] },
+  { id: 'black', ne: 'कालो', en: 'Black', hex: '#2B2B33', ink: '#fff', things: ['🐈‍⬛', '🎩', '🎱'] },
+  { id: 'grey', ne: 'खरानी', en: 'Grey', hex: '#9AA0AC', ink: '#fff', things: ['🐘', '🐭', '🪨'] },
+];
+
+export const shapes = [
+  { id: 'circle', ne: 'गोलो', en: 'Circle', colour: '#E5383B', things: ['⚽', '🍪', '🕰️'] },
+  { id: 'square', ne: 'वर्ग', en: 'Square', colour: '#2F7FE0', things: ['🧇', '🎁', '🔲'] },
+  { id: 'triangle', ne: 'त्रिभुज', en: 'Triangle', colour: '#3BB273', things: ['🍕', '⛺', '🔺'] },
+  { id: 'rectangle', ne: 'आयत', en: 'Rectangle', colour: '#FF8C32', things: ['🚪', '📱', '📺'] },
+  { id: 'star', ne: 'तारा', en: 'Star', colour: '#F5B700', things: ['⭐', '🌟', '✨'] },
+  { id: 'heart', ne: 'मुटु', en: 'Heart', colour: '#F47FB5', things: ['💖', '💌', '🍓'] },
+  { id: 'oval', ne: 'अण्डाकार', en: 'Oval', colour: '#8E5BD8', things: ['🥚', '🏉', '🥔'] },
+  { id: 'diamond', ne: 'हीरा', en: 'Diamond', colour: '#1E9E8F', things: ['💎', '🪁', '🔷'] },
+];
+
+// ─── My body (ids match the drawing in BodySection) ────────
+export const bodyParts = [
+  { id: 'hair', ne: 'कपाल', en: 'Hair' }, { id: 'head', ne: 'टाउको', en: 'Head' },
+  { id: 'eyebrows', ne: 'आँखीभौं', en: 'Eyebrows' }, { id: 'eyes', ne: 'आँखा', en: 'Eyes' },
+  { id: 'ears', ne: 'कान', en: 'Ears' }, { id: 'nose', ne: 'नाक', en: 'Nose' },
+  { id: 'cheeks', ne: 'गाला', en: 'Cheeks' }, { id: 'mouth', ne: 'मुख', en: 'Mouth' },
+  { id: 'neck', ne: 'घाँटी', en: 'Neck' }, { id: 'shoulders', ne: 'काँध', en: 'Shoulders' },
+  { id: 'arms', ne: 'पाखुरा', en: 'Arms' }, { id: 'hands', ne: 'हात', en: 'Hands' },
+  { id: 'fingers', ne: 'औंला', en: 'Fingers' }, { id: 'tummy', ne: 'पेट', en: 'Tummy' },
+  { id: 'knees', ne: 'घुँडा', en: 'Knees' }, { id: 'legs', ne: 'खुट्टा', en: 'Legs' },
+  { id: 'feet', ne: 'पाउ', en: 'Feet' },
+];
+
+// ─── Family (illustrated avatars, no real photos) ──────────
+// `look` drives the drawing in src/Avatar.jsx
+export const familyMembers = [
+  { id: 'me', ne: '{name}', en: '{englishName}', relNe: 'म आफैँ!', relEn: "That's me!", look: { age: 'baby', hair: 'tuft', shirt: '#F47FB5' } },
+  { id: 'aama', ne: 'आमा', en: 'Mum', relNe: 'मेरी आमा', relEn: 'My mother', look: { hair: 'bun', tika: true, shirt: '#E94F6B', earrings: true } },
+  { id: 'buwa', ne: 'बुवा', en: 'Dad', relNe: 'मेरो बुवा', relEn: 'My father', look: { hair: 'short', moustache: true, shirt: '#3F8FE0' } },
+  { id: 'hajurbuwa', ne: 'हजुरबुवा', en: 'Grandpa', relNe: 'बुवा वा आमाको बुवा', relEn: "Dad's or Mum's father", look: { age: 'elder', hair: 'short', grey: true, topi: true, moustache: true, glasses: true, shirt: '#E9DFCB' } },
+  { id: 'hajuraama', ne: 'हजुरआमा', en: 'Grandma', relNe: 'बुवा वा आमाकी आमा', relEn: "Dad's or Mum's mother", look: { age: 'elder', hair: 'bun', grey: true, glasses: true, tika: true, shirt: '#8E5BD8', earrings: true } },
+  { id: 'dai', ne: 'दाइ', en: 'Big brother', relNe: 'ठूलो दाजु', relEn: 'Older brother', look: { age: 'kid', hair: 'spiky', shirt: '#2FA36B' } },
+  { id: 'didi', ne: 'दिदी', en: 'Big sister', relNe: 'ठूली दिदी', relEn: 'Older sister', look: { age: 'kid', hair: 'pony', shirt: '#F2A100' } },
+  { id: 'bhai', ne: 'भाइ', en: 'Little brother', relNe: 'सानो भाइ', relEn: 'Younger brother', look: { age: 'baby', hair: 'short', shirt: '#2C93B8' } },
+  { id: 'bahini', ne: 'बहिनी', en: 'Little sister', relNe: 'सानी बहिनी', relEn: 'Younger sister', look: { age: 'baby', hair: 'pigtails', shirt: '#F06BA8' } },
+  { id: 'kaka', ne: 'काका', en: 'Kaka', relNe: 'बुवाको भाइ', relEn: "Dad's younger brother", look: { hair: 'short', beard: true, shirt: '#E2662F' } },
+  { id: 'kaki', ne: 'काकी', en: 'Kaki', relNe: 'काकाकी श्रीमती', relEn: "Kaka's wife", look: { hair: 'long', tika: true, shirt: '#1E9E8F', earrings: true } },
+  { id: 'thulobuwa', ne: 'ठूलोबुवा', en: 'Thulobuwa', relNe: 'बुवाको दाजु', relEn: "Dad's older brother", look: { hair: 'side', moustache: true, glasses: true, shirt: '#5B6B8C' } },
+  { id: 'thuliaama', ne: 'ठूलीआमा', en: 'Thuliaama', relNe: 'ठूलोबुवाकी श्रीमती', relEn: "Thulobuwa's wife", look: { hair: 'bun', tika: true, shirt: '#B4572E', earrings: true } },
+  { id: 'phupu', ne: 'फुपू', en: 'Phupu', relNe: 'बुवाकी दिदी वा बहिनी', relEn: "Dad's sister", look: { hair: 'long', shirt: '#D9488F', earrings: true } },
+  { id: 'phupaju', ne: 'फुपाजु', en: 'Phupaju', relNe: 'फुपूको श्रीमान्', relEn: "Phupu's husband", look: { hair: 'side', shirt: '#3B7A57' } },
+  { id: 'mama', ne: 'मामा', en: 'Mama', relNe: 'आमाको दाजु वा भाइ', relEn: "Mum's brother", look: { hair: 'spiky', moustache: true, shirt: '#7A5CE0' } },
+  { id: 'maiju', ne: 'माइजु', en: 'Maiju', relNe: 'मामाकी श्रीमती', relEn: "Mama's wife", look: { hair: 'long', tika: true, shirt: '#E08A00', earrings: true } },
+  { id: 'sanima', ne: 'सानीमा', en: 'Sanima', relNe: 'आमाकी बहिनी', relEn: "Mum's younger sister", look: { hair: 'pony', shirt: '#3FA7F0', earrings: true } },
 ];

@@ -1,97 +1,54 @@
 import { useState } from 'react';
-import { AudioBadge, SafeImage } from '../ui.jsx';
+import { SafeImage, Viewer } from '../ui.jsx';
 
-export default function VocabSection({ language, vocabularyCategories, vocabulary, t }) {
+export default function VocabSection({ language, vocabularyCategories, vocabulary }) {
   const [activeCategory, setActiveCategory] = useState(vocabularyCategories[0].id);
-
-  const currentCategory = vocabularyCategories.find((c) => c.id === activeCategory);
+  const [open, setOpen] = useState(null);
+  const cat = vocabularyCategories.find((c) => c.id === activeCategory);
   const words = vocabulary.filter((v) => v.category === activeCategory);
+  const main = (w) => (language === 'ne' ? w.ne : w.en);
+  const sub = (w) => (language === 'ne' ? w.en : w.ne);
 
   return (
-    <>
-      <section className="rounded-3xl border border-slate-100 bg-white p-4 shadow-sm sm:p-5">
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <span className="text-xs font-black uppercase tracking-wider text-emerald-500">
-              {language === 'ne' ? 'संसार बुझ्दै' : 'Discovering the World'}
+    <div className="flex flex-col gap-4">
+      <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 pb-1">
+        {vocabularyCategories.map((c) => {
+          const active = c.id === activeCategory;
+          return (
+            <button key={c.id} type="button" aria-pressed={active} onClick={() => { setActiveCategory(c.id); setOpen(null); }}
+              className={`flex h-14 flex-none items-center gap-2 rounded-full pl-2 pr-5 text-base font-extrabold transition-colors ${active ? 'text-white shadow-[0_3px_0_rgba(0,0,0,0.15)]' : 'bg-white text-[var(--ink-soft)] shadow-[0_2px_0_rgba(46,42,79,0.08)]'}`}
+              style={active ? { background: c.color } : undefined}>
+              <span className={`grid h-10 w-10 place-items-center rounded-full text-2xl ${active ? 'bg-white/25' : ''}`} style={active ? undefined : { background: c.tint }}>{c.icon}</span>
+              {language === 'ne' ? c.nameNe : c.nameEn}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+        {words.map((w, i) => (
+          <button key={w.id} type="button" onClick={() => setOpen(i)} className="tile flex flex-col overflow-hidden rounded-[1.8rem] bg-white text-center" style={{ '--edge': 'rgba(46,42,79,0.1)' }}>
+            <span className="grid h-36 w-full place-items-center sm:h-44" style={{ background: cat.tint }}>
+              <SafeImage src={w.image} alt={w.en} fallback={w.fallback} className="h-full w-full p-2 [--emoji:5rem]" contain />
             </span>
-            <h2 className="mt-1 text-2xl font-black sm:text-3xl">
-              {language === 'ne' ? 'सानुमायाका पहिलो शब्दहरू' : "Sanumaya's First Words"}
-            </h2>
-            <p className="text-sm font-semibold text-slate-500">
-              {language === 'ne'
-                ? 'सानुमायाको वरपर भएका राम्रा कुराहरूको नाम सिकौँ!'
-                : "Let's learn to name all the wonderful things around Sanumaya!"}
-            </p>
-          </div>
-          <span className="float-hand text-5xl drop-shadow-sm">🗣️</span>
-        </div>
-
-        {/* Beautiful Scrolling Tab Bar */}
-        <div className="mt-6 -mx-4 px-4 sm:mx-0 sm:px-0">
-          <div className="flex gap-2 overflow-x-auto pb-4 pt-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x">
-            {vocabularyCategories.map((cat) => {
-              const isActive = activeCategory === cat.id;
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`relative flex-none snap-start rounded-full px-6 py-3 text-sm sm:text-base font-black transition-all hover:scale-105 active:scale-95 ${
-                    isActive ? 'text-white shadow-lg' : 'bg-slate-50 text-slate-400 hover:bg-slate-100'
-                  }`}
-                  style={{
-                    background: isActive ? `linear-gradient(135deg, ${cat.color}, ${cat.toColor})` : '',
-                  }}
-                >
-                  {language === 'ne' ? cat.nameNe : cat.nameEn}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Dynamic Flashcard Grid */}
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 sm:gap-5 mt-2">
-        {words.map((word) => (
-          <button
-            key={word.id}
-            type="button"
-            className="group relative flex flex-col items-center overflow-hidden rounded-[1.8rem] border-[4px] border-white bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl active:scale-95"
-          >
-            {/* Image Area */}
-            <div 
-              className="relative flex h-36 sm:h-44 w-full items-center justify-center overflow-hidden rounded-t-[1.3rem] rounded-b-xl border-b-[3px]"
-              style={{ 
-                borderColor: currentCategory.color,
-                background: `linear-gradient(180deg, ${currentCategory.toColor}22, white)`
-              }}
-            >
-              {word.image ? (
-                <SafeImage src={word.image} alt={word.en} fallback={word.fallback} className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-110" />
-              ) : (
-                <span className="text-[5.5rem] transition-transform duration-500 group-hover:scale-110 drop-shadow-sm">{word.fallback}</span>
-              )}
-            </div>
-
-            {/* Text Area */}
-            <div className="flex w-full flex-col items-center justify-center p-3 sm:p-4 bg-white z-10">
-              <strong className="text-xl sm:text-2xl font-black leading-none text-slate-700">
-                {language === 'ne' ? word.ne : word.en}
-              </strong>
-              <span className="mt-1.5 text-xs sm:text-sm font-bold text-slate-400">
-                {language === 'ne' ? word.en : word.ne}
-              </span>
-            </div>
-            
-            {/* Interactive hover glow */}
-            <div 
-              className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-10 pointer-events-none"
-              style={{ background: currentCategory.color }}
-            />
+            <span className="px-2 pb-3 pt-2">
+              <strong className="block font-display text-2xl font-extrabold leading-tight text-[var(--ink)]">{main(w)}</strong>
+              <span className="block text-sm font-bold text-[var(--ink-soft)]">{sub(w)}</span>
+            </span>
           </button>
         ))}
-      </section>
-    </>
+      </div>
+
+      <Viewer items={words} index={open} setIndex={setOpen} onClose={() => setOpen(null)} language={language} label={cat.nameEn} tint={cat.tint}
+        render={(w) => (
+          <div className="flex w-full flex-col items-center gap-4">
+            <span className="grid h-[46vh] max-h-[26rem] w-full place-items-center overflow-hidden rounded-[2rem] bg-white shadow-[0_6px_0_rgba(46,42,79,0.08)]">
+              <SafeImage src={w.image} alt={w.en} fallback={w.fallback} className="h-full w-full [--emoji:11rem]" contain />
+            </span>
+            <p className="font-display text-6xl font-extrabold leading-tight" style={{ color: cat.color }}>{main(w)}</p>
+            <p className="text-2xl font-bold text-[var(--ink-soft)]">{sub(w)}</p>
+          </div>
+        )} />
+    </div>
   );
 }

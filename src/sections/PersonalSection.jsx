@@ -1,9 +1,21 @@
-import { Sparkles } from 'lucide-react';
-import { SafeImage, themes } from '../ui.jsx';
-
-export default function PersonalSection({ language, profile, draftProfile, setDraftProfile, saveProfile, resetProfile, family, revealed, setRevealed }) {
-  return <>
-    <section className="rounded-3xl border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-amber-50 p-4 shadow-sm sm:p-6"><div className="flex items-center justify-between gap-3"><div><span className="text-xs font-black uppercase text-violet-500">Sanumaya Personal World</span><h2 className="mt-1 text-2xl font-black sm:text-3xl">{language === 'ne' ? `${profile.name} को आफ्नै संसार` : `${profile.englishName}'s own world`}</h2><p className="mt-1 text-sm text-slate-500">{language === 'ne' ? 'यहाँ सुरक्षित गरेको नाम र विवरण सबै निजी कथामा प्रयोग हुन्छ।' : 'Saved details are used across every private story.'}</p></div><Sparkles className="text-amber-400" size={34} /></div><div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{[['name', 'नेपाली नाम', 'Nepali name'], ['englishName', 'English name', 'English name'], ['nickname', 'बोलाउने नाम', 'Nickname'], ['favouriteAnimal', 'मनपर्ने जनावर', 'Favourite animal'], ['favouriteColor', 'मनपर्ने रङ', 'Favourite colour'], ['homePlace', 'बस्ने ठाउँ', 'Home place']].map(([key, ne, en]) => <label key={key} className="rounded-2xl border border-white bg-white/90 p-3 shadow-sm"><span className="text-xs font-black text-slate-500">{language === 'ne' ? ne : en}</span><input value={draftProfile[key]} onChange={(event) => setDraftProfile((value) => ({ ...value, [key]: event.target.value }))} className="mt-1 w-full rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 font-bold outline-none focus:border-violet-300" /></label>)}</div><div className="mt-4 flex flex-wrap gap-2"><button type="button" onClick={saveProfile} className="min-h-12 rounded-2xl bg-violet-600 px-5 font-black text-white shadow">{language === 'ne' ? 'व्यक्तिगत जानकारी सुरक्षित गर्नुहोस्' : 'Save personalisation'}</button><button type="button" onClick={resetProfile} className="min-h-12 rounded-2xl bg-white px-5 font-black text-slate-500 shadow-sm">{language === 'ne' ? 'पहिलेकै बनाउनुहोस्' : 'Reset'}</button></div></section>
-    <section className="rounded-3xl border border-slate-100 bg-white p-4 shadow-sm"><span className="text-xs font-black uppercase text-violet-500">{language === 'ne' ? 'सानुमायाको परिवार' : "Sanumaya's family"}</span><h2 className="mt-1 text-2xl font-black">{language === 'ne' ? 'छोएर परिवारलाई भेटौँ' : 'Tap to meet the family'}</h2><div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">{family.map((member, index) => { const active = revealed[member.id]; const theme = themes[index % themes.length]; return <button type="button" key={member.id} onClick={() => setRevealed((value) => ({ ...value, [member.id]: true }))} className="relative min-h-56 overflow-hidden rounded-3xl border-[3px] shadow-lg" style={{ background: theme.background, borderColor: theme.border }}>{active ? <><SafeImage src={member.image} alt={member.ne} fallback={member.fallback} className="absolute inset-0 h-full w-full" /><span className="absolute inset-0 bg-gradient-to-t from-slate-900/75 via-transparent to-transparent" /><strong className="absolute bottom-3 left-3 right-3 text-left text-lg text-white">{language === 'ne' ? member.ne : member.en}</strong></> : <span className="absolute inset-0 flex flex-col items-center justify-center"><span className="gift-bob text-7xl">🎁</span><strong className="mt-2 px-3 text-sm">{language === 'ne' ? 'को हो? छोएर हेरौँ' : 'Who is it? Tap to reveal'}</strong></span>}</button>; })}</div></section>
-  </>;
+export default function PersonalSection({ language, profile, draftProfile, setDraftProfile, saveProfile, resetProfile }) {
+  const fields = [['name', 'नेपाली नाम', 'Nepali name'], ['englishName', 'अंग्रेजी नाम', 'English name'], ['nickname', 'बोलाउने नाम', 'Nickname'], ['favouriteAnimal', 'मनपर्ने जनावर', 'Favourite animal'], ['favouriteColor', 'मनपर्ने रङ', 'Favourite colour'], ['homePlace', 'बस्ने ठाउँ', 'Home place']];
+  return (
+    <section className="rounded-[2rem] bg-white p-5 shadow-[0_6px_0_rgba(46,42,79,0.08)]">
+      <h2 className="font-display text-2xl font-extrabold text-[var(--ink)]">{language === 'ne' ? `${profile.name}को विवरण` : `${profile.englishName}'s details`}</h2>
+      <p className="mt-1 text-base text-[var(--ink-soft)]">{language === 'ne' ? 'यहाँको नाम कथा र परिवार पानामा देखिन्छ। यो जानकारी यही फोन/कम्प्युटरमा मात्र बस्छ।' : 'These names appear in stories and on the family page. They are saved on this device only.'}</p>
+      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+        {fields.map(([key, ne, en]) => (
+          <label key={key} className="block">
+            <span className="text-sm font-bold text-[var(--ink-soft)]">{language === 'ne' ? ne : en}</span>
+            <input value={draftProfile[key]} onChange={(e) => setDraftProfile((v) => ({ ...v, [key]: e.target.value }))} className="mt-1 h-12 w-full rounded-xl border-2 border-[#E6E1F5] bg-[#FBFAFF] px-3 text-lg font-bold text-[var(--ink)] outline-none focus:border-[#6A45D8]" />
+          </label>
+        ))}
+      </div>
+      <div className="mt-5 flex flex-wrap gap-3">
+        <button type="button" onClick={saveProfile} className="h-12 rounded-2xl bg-[#6A45D8] px-6 font-extrabold text-white shadow-[0_4px_0_#4B2FA8]">{language === 'ne' ? 'सुरक्षित गर्नुहोस्' : 'Save details'}</button>
+        <button type="button" onClick={resetProfile} className="h-12 rounded-2xl bg-[#F1EEFA] px-6 font-extrabold text-[var(--ink-soft)]">{language === 'ne' ? 'सुरुकै नाम राख्नुहोस्' : 'Reset to default'}</button>
+      </div>
+    </section>
+  );
 }

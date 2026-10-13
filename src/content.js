@@ -444,3 +444,83 @@ export const opposites = [
   [{ ne: 'धेरै', en: 'Many', icon: '🍎🍎🍎🍎' }, { ne: 'थोरै', en: 'Few', icon: '🍎' }],
   [{ ne: 'सफा', en: 'Clean', icon: '🛁' }, { ne: 'फोहोर', en: 'Dirty', icon: '🐷' }],
 ];
+
+// ─── Advanced learning: Nepal, world, stories ──────────────
+export const nepalFacts = [
+  { id: 'flag', ne: 'राष्ट्रिय झण्डा', en: 'National flag', factNe: 'संसारमा आयताकार नभएको एउटै राष्ट्रिय झण्डा।', factEn: 'The only national flag in the world that is not a rectangle.', art: 'flag' },
+  { id: 'everest', ne: 'सगरमाथा', en: 'Mount Everest', factNe: 'संसारकै सबैभन्दा अग्लो हिमाल।', factEn: 'The tallest mountain in the world.', icon: '🏔️' },
+  { id: 'kathmandu', ne: 'काठमाडौं', en: 'Kathmandu', factNe: 'नेपालको राजधानी।', factEn: 'The capital city of Nepal.', icon: '🛕' },
+  { id: 'flower', ne: 'लालीगुराँस', en: 'Rhododendron', factNe: 'नेपालको राष्ट्रिय फूल।', factEn: 'The national flower of Nepal.', icon: '🌺' },
+  { id: 'bird', ne: 'डाँफे', en: 'Himalayan monal', factNe: 'नेपालको राष्ट्रिय पक्षी।', factEn: 'The national bird of Nepal.', image: '/images/vocab/Bird.jpeg', icon: '🐦' },
+  { id: 'cow', ne: 'गाई', en: 'Cow', factNe: 'नेपालको राष्ट्रिय जनावर।', factEn: 'The national animal of Nepal.', icon: '🐄' },
+  { id: 'colour', ne: 'सिमरिक', en: 'Crimson', factNe: 'नेपालको राष्ट्रिय रङ।', factEn: 'The national colour of Nepal.', swatch: '#DC143C' },
+  { id: 'lumbini', ne: 'लुम्बिनी', en: 'Lumbini', factNe: 'गौतम बुद्ध जन्मेको ठाउँ।', factEn: 'Where the Buddha was born.', icon: '☸️' },
+  { id: 'rupee', ne: 'रुपैयाँ', en: 'Rupee', factNe: 'नेपालको पैसा।', factEn: "Nepal's money.", icon: '💵' },
+  { id: 'provinces', ne: '७ प्रदेश', en: '7 provinces', factNe: 'नेपालमा सातवटा प्रदेश छन्।', factEn: 'Nepal has seven provinces.', icon: '🗺️' },
+  { id: 'dalbhat', ne: 'दाल भात', en: 'Dal bhat', factNe: 'नेपालीहरूको मनपर्ने खाना।', factEn: "Nepal's favourite everyday meal.", icon: '🍛' },
+  { id: 'volleyball', ne: 'भलिबल', en: 'Volleyball', factNe: 'नेपालको राष्ट्रिय खेल।', factEn: 'The national sport of Nepal.', icon: '🏐' },
+];
+
+export const seasonsAus = [
+  { ne: 'गर्मी', en: 'Summer', icon: '☀️', monthsNe: 'डिसेम्बर – फेब्रुअरी', monthsEn: 'December – February', tint: '#FFF1D6' },
+  { ne: 'शरद', en: 'Autumn', icon: '🍂', monthsNe: 'मार्च – मे', monthsEn: 'March – May', tint: '#FFE9DE' },
+  { ne: 'जाडो', en: 'Winter', icon: '❄️', monthsNe: 'जुन – अगस्ट', monthsEn: 'June – August', tint: '#E2F1FD' },
+  { ne: 'वसन्त', en: 'Spring', icon: '🌸', monthsNe: 'सेप्टेम्बर – नोभेम्बर', monthsEn: 'September – November', tint: '#E1F7EA' },
+];
+
+export const rituNepal = [
+  { ne: 'वसन्त', en: 'Spring', months: 'चैत – वैशाख', icon: '🌸' },
+  { ne: 'ग्रीष्म', en: 'Summer', months: 'जेठ – असार', icon: '☀️' },
+  { ne: 'वर्षा', en: 'Monsoon', months: 'साउन – भदौ', icon: '🌧️' },
+  { ne: 'शरद', en: 'Autumn', months: 'असोज – कात्तिक', icon: '🌾' },
+  { ne: 'हेमन्त', en: 'Early winter', months: 'मंसिर – पुस', icon: '🍂' },
+  { ne: 'शिशिर', en: 'Winter', months: 'माघ – फागुन', icon: '❄️' },
+];
+
+export const weather = [
+  { ne: 'घमाइलो', en: 'Sunny', icon: '☀️' }, { ne: 'बादल लागेको', en: 'Cloudy', icon: '☁️' },
+  { ne: 'पानी परेको', en: 'Rainy', icon: '🌧️' }, { ne: 'हावा चलेको', en: 'Windy', icon: '🌬️' },
+  { ne: 'हिउँ परेको', en: 'Snowy', icon: '🌨️' }, { ne: 'चट्याङ', en: 'Stormy', icon: '⛈️' },
+];
+
+export const planets = [
+  { ne: 'सूर्य', en: 'Sun', colour: '#FFB020', r: 34, factNe: 'सूर्य एउटा ठूलो तारा हो।', factEn: 'The Sun is a big star.' },
+  { ne: 'बुध', en: 'Mercury', colour: '#A8A29E', r: 8, factNe: 'सूर्यको सबैभन्दा नजिकको ग्रह।', factEn: 'The closest planet to the Sun.' },
+  { ne: 'शुक्र', en: 'Venus', colour: '#E9C46A', r: 12, factNe: 'राति सबैभन्दा चम्किलो देखिने ग्रह।', factEn: 'The brightest planet in the night sky.' },
+  { ne: 'पृथ्वी', en: 'Earth', colour: '#2F7FE0', r: 13, factNe: 'हाम्रो घर।', factEn: 'Our home.' },
+  { ne: 'मंगल', en: 'Mars', colour: '#D2541E', r: 10, factNe: 'रातो ग्रह।', factEn: 'The red planet.' },
+  { ne: 'बृहस्पति', en: 'Jupiter', colour: '#C9A27A', r: 26, factNe: 'सबैभन्दा ठूलो ग्रह।', factEn: 'The biggest planet.' },
+  { ne: 'शनि', en: 'Saturn', colour: '#E5C07B', r: 22, ring: true, factNe: 'सुन्दर औँठी भएको ग्रह।', factEn: 'The planet with beautiful rings.' },
+  { ne: 'अरुण', en: 'Uranus', colour: '#7FD3E0', r: 16, factNe: 'ढल्केर घुम्ने ग्रह।', factEn: 'It spins on its side.' },
+  { ne: 'वरुण', en: 'Neptune', colour: '#3B5BDB', r: 16, factNe: 'सूर्यबाट सबैभन्दा टाढाको ग्रह।', factEn: 'The farthest planet from the Sun.' },
+];
+
+// Longer stories for older children: retellings of public-domain fables.
+export const bigStories = [
+  {
+    id: 'hare-tortoise', titleNe: 'खरायो र कछुवा', titleEn: 'The Hare and the Tortoise', cover: '🐇🐢',
+    pages: [
+      ['🐇🌳🐢', 'एउटा जंगलमा एउटा खरायो र एउटा कछुवा बस्थे। खरायो धेरै छिटो दौडन्थ्यो।', 'In a forest lived a hare and a tortoise. The hare could run very fast.'],
+      ['🐇😆', 'खरायोले कछुवालाई जिस्काउँदै भन्यो, "तिमी त कति ढिलो हिँड्छौ!"', 'The hare laughed at the tortoise. "You are so slow!" he said.'],
+      ['🐢🙂', 'कछुवाले शान्त भएर भन्यो, "ल, दौड प्रतियोगिता गरौँ।"', 'The tortoise calmly replied, "Then let us have a race."'],
+      ['🏁🐇💨', 'दौड सुरु भयो। खरायो फुर्र दौडियो र धेरै अगाडि पुग्यो।', 'The race began. The hare zoomed off and was soon far ahead.'],
+      ['🌳🐇😴', '"कछुवा त धेरै पछाडि छ," खरायोले सोच्यो, र रूखमुनि सुत्यो।', '"The tortoise is far behind," thought the hare, and he lay down for a nap under a tree.'],
+      ['🐢👣', 'कछुवा नरोकिकन बिस्तारै-बिस्तारै हिँडिरह्यो।', 'The tortoise kept walking, slowly and steadily, without stopping.'],
+      ['🐢🏁🎉', 'खरायो ब्युँझँदा कछुवा त अन्तिम रेखामा पुगिसकेको थियो!', 'When the hare woke up, the tortoise had already crossed the finish line!'],
+      ['💡', 'बिस्तारै भए पनि नरोकी काम गर्नेले जित्छ।', 'Slow and steady wins the race.'],
+    ],
+  },
+  {
+    id: 'thirsty-crow', titleNe: 'तिर्खाएको काग', titleEn: 'The Thirsty Crow', cover: '🐦‍⬛🏺',
+    pages: [
+      ['☀️🐦‍⬛', 'गर्मीको दिन थियो। एउटा काग धेरै तिर्खायो।', 'It was a hot summer day, and a crow was very thirsty.'],
+      ['🐦‍⬛🔍', 'ऊ पानी खोज्दै यताउता उड्यो।', 'He flew here and there, looking for water.'],
+      ['🏺💧', 'अन्त्यमा उसले एउटा गाग्री देख्यो, तर पानी धेरै तल थियो।', 'At last he found a pot, but the water was right at the bottom.'],
+      ['🐦‍⬛🤔', 'कागको चुच्चो पानीसम्म पुगेन। उसले सोच्यो, "अब के गर्ने?"', 'His beak could not reach the water. He thought, "What shall I do now?"'],
+      ['🪨🪨🪨', 'उसले वरपर साना-साना ढुङ्गा देख्यो।', 'Then he noticed small pebbles all around.'],
+      ['🐦‍⬛🪨🏺', 'उसले एउटा-एउटा गरेर ढुङ्गा गाग्रीमा खसाल्यो।', 'One by one, he dropped the pebbles into the pot.'],
+      ['💧⬆️', 'बिस्तारै पानी माथि आयो!', 'Slowly, the water rose higher and higher!'],
+      ['🐦‍⬛😊', 'कागले पानी पियो र खुसी भएर उड्यो। सोचेर काम गरे बाटो भेटिन्छ।', 'The crow drank the water and flew away happily. If you think hard, you can find a way.'],
+    ],
+  },
+];

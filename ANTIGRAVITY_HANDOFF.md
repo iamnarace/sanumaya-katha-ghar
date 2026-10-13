@@ -11,7 +11,7 @@
 > - **Shared UI** in `src/ui.jsx`: `TopBar`, `LanguageToggle`, `Tabs`, `Viewer` (full-screen swipe flashcard), `useHashSection`, `num()` for Nepali digits.
 > - **Tailwind** is now compiled at build time (`postcss.config.js`); the CDN script was removed from `index.html`.
 > - Fixed: `main` failed to build (unclosed `<div>` in `App.jsx`); missing Tihar image; story reader buttons that did nothing (download/share/listen) removed. Audio is still off.
-> - **Big kids 3–6** (`AdvancedSection`, wide button under the home grid): all times tables 1–10 (all / one / quiz), add and take away with pictures, barakhari for every consonant, days of the week plus Nepali and English months, opposites. Times tables moved here from Numbers.
+> - **Advanced learning** (ages 3–6; `AdvancedSection` + `AdvancedMore`, wide button under the home grid) opens a grid of 10 topics: times tables 1–10 (all / one / quiz), add and take away, barakhari, clock (o'clock and half past, Nepali डेढ/अढाई/साढे), days and months, My Nepal facts with an SVG flag, seasons/weather/planets, puzzles (what comes next, odd one out), opposites, and longer stories (public-domain fables). Times tables moved here from Numbers.
 > - Data for all new sections lives in `src/content.js` (`numbers`, `colours`, `shapes`, `bodyParts`, `familyMembers`).
 
 **Handoff date:** 2 August 2026 (Australia/Sydney)  

@@ -81,7 +81,7 @@ export function TopBar({ titleNe, titleEn, language, setLanguage, onHome, accent
           <Home size={24} strokeWidth={2.6} />
         </button>
         <div className="min-w-0 flex-1 leading-tight">
-          <h1 className="truncate font-display text-2xl font-extrabold sm:text-3xl" style={{ color: accent }}>{language === 'ne' ? titleNe : titleEn}</h1>
+          <h1 className="line-clamp-2 font-display text-xl font-extrabold leading-tight sm:text-3xl" style={{ color: accent }}>{language === 'ne' ? titleNe : titleEn}</h1>
           <p className="truncate text-sm font-semibold text-[var(--ink-soft)]">{language === 'ne' ? titleEn : titleNe}</p>
         </div>
         <LanguageToggle language={language} setLanguage={setLanguage} />

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Tabs, num } from '../ui.jsx';
 import { Tables } from './NumbersSection.jsx';
+import { BigStoriesArea, ClockArea, NepalArea, NepalFlag, PuzzlesArea, WorldArea } from './AdvancedMore.jsx';
 
 const ACCENT = '#3B5BDB';
 const card = 'rounded-[1.8rem] bg-white shadow-[0_6px_0_rgba(46,42,79,0.08)]';
@@ -181,23 +182,54 @@ function OppositesArea({ language, opposites }) {
   );
 }
 
+const TOPICS = [
+  { id: 'tables', ne: 'पहाडा', en: 'Times tables', icon: '✖️', bg: '#E7ECFF', edge: '#B9C6FA', ink: '#3B5BDB' },
+  { id: 'sums', ne: 'जोड-घटाउ', en: 'Add & take away', icon: '➕', bg: '#FFF3D6', edge: '#F4CE7A', ink: '#C97800' },
+  { id: 'barakhari', ne: 'बाह्रखरी', en: 'Barakhari', glyph: 'का', bg: '#EEE8FF', edge: '#C9B8FA', ink: '#6A45D8' },
+  { id: 'clock', ne: 'घडी', en: 'Clock', icon: '🕒', bg: '#E2F1FD', edge: '#A9D3F5', ink: '#2F7FE0' },
+  { id: 'calendar', ne: 'दिन र महिना', en: 'Days & months', icon: '📅', bg: '#FFE9DE', edge: '#FDBE9D', ink: '#D2541E' },
+  { id: 'nepal', ne: 'मेरो नेपाल', en: 'My Nepal', flag: true, bg: '#FFE8EC', edge: '#FFB8C6', ink: '#DC143C' },
+  { id: 'world', ne: 'ऋतु र ग्रह', en: 'Seasons & space', icon: '🪐', bg: '#DDF5F1', edge: '#97DDD3', ink: '#16877A' },
+  { id: 'puzzles', ne: 'दिमागी खेल', en: 'Puzzles', icon: '🧩', bg: '#E1F7EA', edge: '#9EDFB9', ink: '#24875A' },
+  { id: 'opposites', ne: 'उल्टो शब्द', en: 'Opposites', icon: '↔️', bg: '#F1EEFA', edge: '#D6CFF0', ink: '#5B4FA0' },
+  { id: 'stories', ne: 'लामा कथा', en: 'Longer stories', icon: '📚', bg: '#FDE6F1', edge: '#F6B3D3', ink: '#C23A7E' },
+];
+
 export default function AdvancedSection(props) {
   const { language } = props;
-  const [tab, setTab] = useState('tables');
+  const [topic, setTopic] = useState(null);
+  const current = TOPICS.find((t) => t.id === topic);
+  if (!current) {
+    return (
+      <div className="flex flex-col gap-4">
+        <p className="text-lg font-semibold text-[var(--ink-soft)]">{language === 'ne' ? '३ देखि ६ वर्षका नानीहरूका लागि। एउटा विषय छान।' : 'For children aged 3 to 6. Pick a topic.'}</p>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          {TOPICS.map((t) => (
+            <button key={t.id} type="button" onClick={() => { setTopic(t.id); window.scrollTo(0, 0); }} className="tile flex aspect-[1/0.95] flex-col items-center justify-center gap-2 rounded-[1.8rem] px-2" style={{ background: t.bg, '--edge': t.edge }}>
+              <span className="grid h-16 place-items-center">{t.flag ? <NepalFlag className="h-16" /> : t.glyph ? <span className="font-display text-5xl font-extrabold" style={{ color: t.ink }}>{t.glyph}</span> : <span className="text-5xl">{t.icon}</span>}</span>
+              <span className="text-center leading-tight"><span className="block font-display text-xl font-extrabold" style={{ color: t.ink }}>{language === 'ne' ? t.ne : t.en}</span><span className="block text-xs font-bold text-[var(--ink-soft)]">{language === 'ne' ? t.en : t.ne}</span></span>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col gap-4">
-      <Tabs value={tab} onChange={setTab} accent={ACCENT} options={[
-        ['tables', language === 'ne' ? 'पहाडा' : 'Times tables', '✖️'],
-        ['sums', language === 'ne' ? 'जोड-घटाउ' : 'Add & take away', '➕'],
-        ['barakhari', language === 'ne' ? 'बाह्रखरी' : 'Barakhari', 'का'],
-        ['calendar', language === 'ne' ? 'दिन र महिना' : 'Days & months', '📅'],
-        ['opposites', language === 'ne' ? 'उल्टो शब्द' : 'Opposites', '↔️'],
-      ]} />
-      {tab === 'tables' && <TablesArea {...props} />}
-      {tab === 'sums' && <SumsArea {...props} />}
-      {tab === 'barakhari' && <Barakhari {...props} />}
-      {tab === 'calendar' && <CalendarArea {...props} />}
-      {tab === 'opposites' && <OppositesArea {...props} />}
+      <div className="flex items-center gap-3">
+        <button type="button" onClick={() => setTopic(null)} className="flex h-11 flex-none items-center gap-1 rounded-full bg-white pl-3 pr-4 text-sm font-extrabold text-[var(--ink-soft)] shadow-[0_3px_0_rgba(46,42,79,0.1)]">‹ {language === 'ne' ? 'सबै विषय' : 'All topics'}</button>
+        <h2 className="truncate font-display text-2xl font-extrabold" style={{ color: current.ink }}>{language === 'ne' ? current.ne : current.en}</h2>
+      </div>
+      {topic === 'tables' && <TablesArea {...props} />}
+      {topic === 'sums' && <SumsArea {...props} />}
+      {topic === 'barakhari' && <Barakhari {...props} />}
+      {topic === 'clock' && <ClockArea {...props} />}
+      {topic === 'calendar' && <CalendarArea {...props} />}
+      {topic === 'nepal' && <NepalArea {...props} />}
+      {topic === 'world' && <WorldArea {...props} />}
+      {topic === 'puzzles' && <PuzzlesArea {...props} />}
+      {topic === 'opposites' && <OppositesArea {...props} />}
+      {topic === 'stories' && <BigStoriesArea {...props} />}
     </div>
   );
 }
